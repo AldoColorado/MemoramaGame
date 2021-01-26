@@ -1,0 +1,45 @@
+﻿<Window x:Class="Memorama.RecuperarContrasenia"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Memorama"
+        mc:Ignorable="d"
+        Title="Memorama" Height="450" Width="800">
+    <Grid FlowDirection="LeftToRight" Background="#FF7BC6D6" RenderTransformOrigin="0,1">
+        <Grid x:Name="CorreoContrasenia" HorizontalAlignment="Left" Height="332" Margin="276,41,0,0" VerticalAlignment="Top" Width="258" Background="#FFF5E5E5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" ></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Grid.Row="0">
+                <materialDesign:ColorZone Mode="PrimaryMid">
+                    <TextBlock Text="Ingresar correo de jugador" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Bottom" Margin="20 30 0 10">
+                    </TextBlock>
+                </materialDesign:ColorZone>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <materialDesign:PackIcon Kind="mail" Foreground="{Binding ElementName=TextoNickName, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 6"/>
+                        <TextBox x:Name="TextoCorreo" Width="240" materialDesign:HintAssist.Hint="Correo" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                    </StackPanel>
+
+                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="Continuar" Width="110" HorizontalAlignment="Right" Margin="0 10 20 0" Click="BotonContinuar"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

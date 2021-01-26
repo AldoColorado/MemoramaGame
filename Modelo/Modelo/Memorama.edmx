@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MemoramaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EstadisticaPartida">
+          <Key>
+            <PropertyRef Name="idJugador" />
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idJugador" Type="int" Nullable="false" />
+          <Property Name="idPartida" Type="int" Nullable="false" />
+          <Property Name="puntaje" Type="int" />
+          <Property Name="paresObtenidos" Type="int" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="idHistorial" />
+          </Key>
+          <Property Name="idHistorial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partidasJugadas" Type="int" />
+          <Property Name="partidasGanadas" Type="int" />
+          <Property Name="idJugador" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jugador">
+          <Key>
+            <PropertyRef Name="idJugador" />
+          </Key>
+          <Property Name="idJugador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasenia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="correoElectronico" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="PartidaTarjeta">
+          <Key>
+            <PropertyRef Name="idPartida" />
+            <PropertyRef Name="idTarjeta" />
+          </Key>
+          <Property Name="idPartida" Type="int" Nullable="false" />
+          <Property Name="idTarjeta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="idTarjeta" />
+          </Key>
+          <Property Name="idTarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Historial_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="EstadisticaPartida" Type="Self.EstadisticaPartida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="EstadisticaPartida">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partida">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="EstadisticaPartida" Type="Self.EstadisticaPartida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="idPartida" />
+            </Principal>
+            <Dependent Role="EstadisticaPartida">
+              <PropertyRef Name="idPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK1_Partida">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="PartidaTarjeta" Type="Self.PartidaTarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="idPartida" />
+            </Principal>
+            <Dependent Role="PartidaTarjeta">
+              <PropertyRef Name="idPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK2_Tarjeta">
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="1" />
+          <End Role="PartidaTarjeta" Type="Self.PartidaTarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarjeta">
+              <PropertyRef Name="idTarjeta" />
+            </Principal>
+            <Dependent Role="PartidaTarjeta">
+              <PropertyRef Name="idTarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MemoramaModelStoreContainer">
+          <EntitySet Name="EstadisticaPartida" EntityType="Self.EstadisticaPartida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jugador" EntityType="Self.Jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartidaTarjeta" EntityType="Self.PartidaTarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Historial_Jugador" Association="Self.FK_Historial_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Historial" EntitySet="Historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jugador" Association="Self.FK_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="EstadisticaPartida" EntitySet="EstadisticaPartida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partida" Association="Self.FK_Partida">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="EstadisticaPartida" EntitySet="EstadisticaPartida" />
+          </AssociationSet>
+          <AssociationSet Name="FK1_Partida" Association="Self.FK1_Partida">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="PartidaTarjeta" EntitySet="PartidaTarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK2_Tarjeta" Association="Self.FK2_Tarjeta">
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+            <End Role="PartidaTarjeta" EntitySet="PartidaTarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MemoramaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EstadisticaPartida">
+          <Key>
+            <PropertyRef Name="idJugador" />
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idJugador" Type="Int32" Nullable="false" />
+          <Property Name="idPartida" Type="Int32" Nullable="false" />
+          <Property Name="puntaje" Type="Int32" />
+          <Property Name="paresObtenidos" Type="Int32" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK_Jugador" FromRole="EstadisticaPartida" ToRole="Jugador" />
+          <NavigationProperty Name="Partida" Relationship="Self.FK_Partida" FromRole="EstadisticaPartida" ToRole="Partida" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="idHistorial" />
+          </Key>
+          <Property Name="idHistorial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partidasJugadas" Type="Int32" />
+          <Property Name="partidasGanadas" Type="Int32" />
+          <Property Name="idJugador" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK_Historial_Jugador" FromRole="Historial" ToRole="Jugador" />
+        </EntityType>
+        <EntityType Name="Jugador">
+          <Key>
+            <PropertyRef Name="idJugador" />
+          </Key>
+          <Property Name="idJugador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasenia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="correoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EstadisticaPartida" Relationship="Self.FK_Jugador" FromRole="Jugador" ToRole="EstadisticaPartida" />
+          <NavigationProperty Name="Historial" Relationship="Self.FK_Historial_Jugador" FromRole="Jugador" ToRole="Historial" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EstadisticaPartida" Relationship="Self.FK_Partida" FromRole="Partida" ToRole="EstadisticaPartida" />
+          <NavigationProperty Name="Tarjeta" Relationship="Self.PartidaTarjeta" FromRole="Partida" ToRole="Tarjeta" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="idTarjeta" />
+          </Key>
+          <Property Name="idTarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Partida" Relationship="Self.PartidaTarjeta" FromRole="Tarjeta" ToRole="Partida" />
+        </EntityType>
+        <Association Name="FK_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="EstadisticaPartida" Type="Self.EstadisticaPartida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="EstadisticaPartida">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partida">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="EstadisticaPartida" Type="Self.EstadisticaPartida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="idPartida" />
+            </Principal>
+            <Dependent Role="EstadisticaPartida">
+              <PropertyRef Name="idPartida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PartidaTarjeta">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MemoramaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EstadisticaPartida" EntityType="Self.EstadisticaPartida" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" />
+          <EntitySet Name="Jugador" EntityType="Self.Jugador" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" />
+          <AssociationSet Name="FK_Jugador" Association="Self.FK_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="EstadisticaPartida" EntitySet="EstadisticaPartida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partida" Association="Self.FK_Partida">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="EstadisticaPartida" EntitySet="EstadisticaPartida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Jugador" Association="Self.FK_Historial_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Historial" EntitySet="Historial" />
+          </AssociationSet>
+          <AssociationSet Name="PartidaTarjeta" Association="Self.PartidaTarjeta">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MemoramaModelStoreContainer" CdmEntityContainer="MemoramaEntities">
+          <EntitySetMapping Name="EstadisticaPartida">
+            <EntityTypeMapping TypeName="MemoramaModel.EstadisticaPartida">
+              <MappingFragment StoreEntitySet="EstadisticaPartida">
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+                <ScalarProperty Name="puntaje" ColumnName="puntaje" />
+                <ScalarProperty Name="paresObtenidos" ColumnName="paresObtenidos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historial">
+            <EntityTypeMapping TypeName="MemoramaModel.Historial">
+              <MappingFragment StoreEntitySet="Historial">
+                <ScalarProperty Name="idHistorial" ColumnName="idHistorial" />
+                <ScalarProperty Name="partidasJugadas" ColumnName="partidasJugadas" />
+                <ScalarProperty Name="partidasGanadas" ColumnName="partidasGanadas" />
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jugador">
+            <EntityTypeMapping TypeName="MemoramaModel.Jugador">
+              <MappingFragment StoreEntitySet="Jugador">
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="nickName" ColumnName="nickName" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partida">
+            <EntityTypeMapping TypeName="MemoramaModel.Partida">
+              <MappingFragment StoreEntitySet="Partida">
+                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjeta">
+            <EntityTypeMapping TypeName="MemoramaModel.Tarjeta">
+              <MappingFragment StoreEntitySet="Tarjeta">
+                <ScalarProperty Name="idTarjeta" ColumnName="idTarjeta" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PartidaTarjeta" TypeName="MemoramaModel.PartidaTarjeta" StoreEntitySet="PartidaTarjeta">
+            <EndProperty Name="Partida">
+              <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+            </EndProperty>
+            <EndProperty Name="Tarjeta">
+              <ScalarProperty Name="idTarjeta" ColumnName="idTarjeta" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

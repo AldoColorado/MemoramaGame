@@ -1,0 +1,43 @@
+﻿<Window x:Class="Memorama.Lobby"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Memorama"
+        Closing="CerrarVentana"
+        mc:Ignorable="d"
+        Title="Lobby" Height="450" Width="800">
+    <Grid>
+        <ListView Name="jugadoresEnLinea" Margin="415,4,9.6,268">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding nickName}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <materialDesign:ColorZone Mode="PrimaryLight" Margin="0,4,0,0">
+            <TextBlock Text="JUGADORES EN LINEA" Margin="415,4 0, 0"></TextBlock>
+        </materialDesign:ColorZone>
+
+        <materialDesign:ColorZone Mode="PrimaryDark" Margin="0,4,381.6,0" Height="21">
+            <TextBlock Name="TxtJugador" Margin="0,4,110,-0.2"></TextBlock>
+        </materialDesign:ColorZone>
+
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="CREAR PARTIDA" Width="286" HorizontalAlignment="Right" Margin="0,82,477.6,304" Click="BotonCrearPartida" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="UNIRSE A PARTIDA" Width="286" HorizontalAlignment="Right" Margin="0,131,477.6,255" Click="BotonUnirseAPartida" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="SALIR" Width="286" HorizontalAlignment="Right" Margin="0,344,477.6,42" Click="BotonSalir" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="VER PUNTAJES DE JUGADORES" Width="286" HorizontalAlignment="Right" Margin="0,193,477.6,193" Click="BotonPuntajes" Height="Auto"/>
+
+        
+
+    </Grid>
+</Window>
