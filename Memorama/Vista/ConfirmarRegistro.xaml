@@ -13,7 +13,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memorama"
         mc:Ignorable="d"
-        Title="Memorama" Height="450" Width="800">
+        xmlns:idioma="clr-namespace:Memorama.Properties.Idiomas"
+        Title="{x:Static idioma:Idioma.ventanaRegistro}" Height="450" Width="800">
     <Grid FlowDirection="LeftToRight" Background="#FF7BC6D6" RenderTransformOrigin="0,1">
         <Grid x:Name="Login1" HorizontalAlignment="Left" Height="332" Margin="276,41,0,0" VerticalAlignment="Top" Width="258" Background="#FFF5E5E5">
             <Grid.RowDefinitions>
@@ -25,7 +26,7 @@
 
             <Grid Grid.Row="0">
                 <materialDesign:ColorZone Mode="PrimaryMid">
-                    <TextBlock Text="Ingresar codigo de confirmacion" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Bottom" Margin="20 30 0 10">
+                    <TextBlock Text="{x:Static idioma:Idioma.vRegistroH1}" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Bottom" Margin="20 30 0 10">
                     </TextBlock>
                 </materialDesign:ColorZone>
             </Grid>
@@ -34,10 +35,10 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <materialDesign:PackIcon Kind="ConfirmationNumberOutline" Foreground="{Binding ElementName=TextoNickName, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 6"/>
-                        <TextBox x:Name="TextoCodigo" Width="240" materialDesign:HintAssist.Hint="Codigo" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                        <TextBox x:Name="TextoCodigo" Width="240" materialDesign:HintAssist.Hint="{x:Static idioma:Idioma.codigo}" materialDesign:HintAssist.IsFloating="True"></TextBox>
                     </StackPanel>
 
-                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="Registrarse" Width="110" HorizontalAlignment="Right" Margin="0 10 20 0" Click="BotonRegistrarse"/>
+                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="{x:Static idioma:Idioma.boton_Registrarse}" Width="110" HorizontalAlignment="Right" Margin="0 10 20 0" Click="BotonRegistrarse"/>
                 </StackPanel>
             </Grid>
         </Grid>

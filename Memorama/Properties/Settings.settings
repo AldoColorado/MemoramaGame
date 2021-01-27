@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DESKTOP-9REN919;Initial Catalog=Memorama1.0;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="lenguaje" Type="System.String" Scope="User">
+      <Value Profile="(Default)">es-MX</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

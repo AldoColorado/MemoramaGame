@@ -45,6 +45,13 @@ namespace Memorama
             DragMove();
         }
 
+        private void BotonAjustes(object sender, RoutedEventArgs e)
+        {
+            Ajustes ventanaAjustes = new Ajustes();
+            ventanaAjustes.Show();
+
+        }
+
         private void BotonIngresar(object sender, RoutedEventArgs e)
         {
             Jugador jugador = new Jugador();

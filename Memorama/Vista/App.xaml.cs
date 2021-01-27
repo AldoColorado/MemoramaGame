@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -13,5 +14,11 @@ namespace Memorama
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var idioma = Memorama.Properties.Settings.Default.lenguaje;
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(idioma);
+            base.OnStartup(e);
+        }
     }
 }
