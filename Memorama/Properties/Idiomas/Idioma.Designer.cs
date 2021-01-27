@@ -259,6 +259,33 @@ namespace Memorama.Properties.Idiomas {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Usuario o contraseña incorrecta.
+        /// </summary>
+        public static string vLoginMsj1 {
+            get {
+                return ResourceManager.GetString("vLoginMsj1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ERROR: El servidor no está disponible, intente de nuevo más tarde.
+        /// </summary>
+        public static string vLoginMsj2 {
+            get {
+                return ResourceManager.GetString("vLoginMsj2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador ya se encuentra conectado.
+        /// </summary>
+        public static string vLoginMsj3 {
+            get {
+                return ResourceManager.GetString("vLoginMsj3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ingresa correo de recuperación.
         /// </summary>
         public static string vRecuperarH1 {

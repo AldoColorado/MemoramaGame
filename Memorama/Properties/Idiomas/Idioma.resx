@@ -183,6 +183,15 @@
   <data name="ventanaRegistro" xml:space="preserve">
     <value>Registro</value>
   </data>
+  <data name="vLoginMsj1" xml:space="preserve">
+    <value>Usuario o contraseña incorrecta</value>
+  </data>
+  <data name="vLoginMsj2" xml:space="preserve">
+    <value>ERROR: El servidor no está disponible, intente de nuevo más tarde</value>
+  </data>
+  <data name="vLoginMsj3" xml:space="preserve">
+    <value>El jugador ya se encuentra conectado</value>
+  </data>
   <data name="vRecuperarH1" xml:space="preserve">
     <value>Ingresa correo de recuperación</value>
   </data>

@@ -183,6 +183,15 @@
   <data name="ventanaRegistro" xml:space="preserve">
     <value>Sign up</value>
   </data>
+  <data name="vLoginMsj1" xml:space="preserve">
+    <value>User or password incorrect</value>
+  </data>
+  <data name="vLoginMsj2" xml:space="preserve">
+    <value>ERROR: The server isn't available, please try again later</value>
+  </data>
+  <data name="vLoginMsj3" xml:space="preserve">
+    <value>The player is already online</value>
+  </data>
   <data name="vRecuperarH1" xml:space="preserve">
     <value>Enter your email</value>
   </data>

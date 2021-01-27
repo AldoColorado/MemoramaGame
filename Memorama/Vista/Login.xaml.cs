@@ -3,7 +3,10 @@ using Modelo.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,17 +27,21 @@ namespace Memorama
     /// </summary>
     public partial class Login : ProxyLogin.ILoginServiceCallback
     {
+        private ResourceManager recurso;
         public bool aceptado = false;
         private ObservableCollection<Jugador> jugadoresConectados;
         Dictionary<Jugador, ILoginServiceCallback> jugadoresEnLinea = new Dictionary<Jugador, ILoginServiceCallback>();
         InstanceContext contexto;
         ProxyLogin.LoginServiceClient servidor;
 
+
         public Login()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             jugadoresConectados = new ObservableCollection<Jugador>();
+
+            this.recurso = new ResourceManager("Memorama.Properties.Idiomas.Idioma", Assembly.GetExecutingAssembly());
 
             contexto = new InstanceContext(this);
             servidor = new ProxyLogin.LoginServiceClient(contexto);
@@ -64,7 +71,8 @@ namespace Memorama
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrecta");
+                string msj1 = this.recurso.GetString("vLoginMsj1");
+                MessageBox.Show(msj1);
             }
         }
 
@@ -97,7 +105,8 @@ namespace Memorama
             }
             catch(Exception ex)
             {
-                MessageBox.Show("ERROR: El servidor no esta disponible, intente de nuevo más tarde");
+                string msj2 = this.recurso.GetString("vLoginMsj2");
+                MessageBox.Show(msj2);
                 MessageBox.Show(ex.ToString());
 
                 Application.Current.Shutdown();
@@ -127,12 +136,14 @@ namespace Memorama
                 }
                 else
                 {
-                    MessageBox.Show("El jugador ya se encuentra conectado");
+                    string msj3 = this.recurso.GetString("vLoginMsj3");
+                    MessageBox.Show(msj3);
                 }
             }
             catch(Exception ex)
             {
-                MessageBox.Show("ERROR: El servidor no esta disponible, intente de nuevo más tarde");
+                string msj2 = this.recurso.GetString("vLoginMsj2");
+                MessageBox.Show(msj2);
                 Application.Current.Shutdown();
             }
         }
