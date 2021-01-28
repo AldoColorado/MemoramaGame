@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Host
 {
+    /// <summary>
+    /// Clase que activa y desactiva el servidor
+    /// </summary>
     class host
     {
         static void Main(string[] args)

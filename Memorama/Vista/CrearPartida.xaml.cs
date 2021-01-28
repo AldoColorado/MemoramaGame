@@ -29,6 +29,11 @@ namespace Memorama.Vista
         string codigoPartida;
         ObservableCollection<Jugador> jugadores;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="jugadores">Lista de jugadores conectados</param>
+        /// <param name="jugador">Jugador actual</param>
         public CrearPartida(ObservableCollection<Jugador> jugadores, Jugador jugador)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -41,26 +46,43 @@ namespace Memorama.Vista
             servidor = new ProxyPartida.PartidaServiceClient(contexto);
         }
 
+        /// <summary>
+        /// Metodo no implementado
+        /// </summary>
+        /// <param name="jugadores">Jugadores conectados</param>
         public void JugadoresEnPartida(Jugador[] jugadores)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo no implementado
+        /// </summary>
+        /// <param name="numeros">Arreglo de numeros</param>
         public void OrdenCartas(int[] numeros)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Evento del boton crear partida
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonCrearPartida(object sender, RoutedEventArgs e)
         {
             string codigoConTexto = "CODIGO: ";
-            
             codigoPartida= servidor.GenerarCodigo();
             TxtCodigo.Text = codigoConTexto + codigoPartida;
 
             partida.codigo = codigoPartida;   
         }
 
+        /// <summary>
+        /// Evento del boron iniciar partida
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonIniciarPartida(object sender, RoutedEventArgs e)
         {
             bool creada = false;
@@ -91,6 +113,11 @@ namespace Memorama.Vista
             }   
         }
 
+        /// <summary>
+        /// Evento del boton regresar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegresar(object sender, RoutedEventArgs e)
         {
             Lobby lobby = new Lobby(jugadores, jugador);

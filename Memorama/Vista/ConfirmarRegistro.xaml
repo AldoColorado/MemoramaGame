@@ -16,7 +16,8 @@
         xmlns:idioma="clr-namespace:Memorama.Properties.Idiomas"
         Title="{x:Static idioma:Idioma.ventanaRegistro}" Height="450" Width="800">
     <Grid FlowDirection="LeftToRight" Background="#FF7BC6D6" RenderTransformOrigin="0,1">
-        <Grid x:Name="Login1" HorizontalAlignment="Left" Height="332" Margin="276,41,0,0" VerticalAlignment="Top" Width="258" Background="#FFF5E5E5">
+        <Grid x:Name="Login1" HorizontalAlignment="Left" Height="332" Margin="276,41,0,0" VerticalAlignment="Top" Width="258" 
+              Background="#FFF5E5E5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" ></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>

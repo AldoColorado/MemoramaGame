@@ -28,17 +28,30 @@ namespace Memorama
         public string codigo;
         public bool correoEnviado;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public Registrarse()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Metodo propiedad de la clase
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
+        /// <summary>
+        /// Motodo para hacer el registro del jugador
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegistrarse(object sender, RoutedEventArgs e)
         {
             string contraseniaEncriptada = string.Empty;
@@ -55,8 +68,6 @@ namespace Memorama
 
             InstanceContext contexto = new InstanceContext(this);
             ProxyRegistro.RegistroServiceClient servidor = new ProxyRegistro.RegistroServiceClient(contexto);
-
-            
 
             if(jugador.nickName !="" && jugador.nombre != "" && jugador.correoElectronico != "" && jugador.contrasenia != "")
             {
@@ -75,9 +86,7 @@ namespace Memorama
                         else
                         {
                             MessageBox.Show("No se pudo enviar el correo, rectifique que sea valido");
-                        }
-
-                        
+                        }      
                     }
                     catch(Exception ex)
                     {
@@ -95,10 +104,11 @@ namespace Memorama
             {
                 MessageBox.Show("Campos inválidos, por favor ingresa los datos correctamente");
             }
-
-
         }
 
+        /// <summary>
+        /// Metodo para generar el codigo de registro
+        /// </summary>
         public void GenerarCodigoRegistro()
         {
             var seed = Environment.TickCount;
@@ -111,16 +121,28 @@ namespace Memorama
             }
         }
 
+        /// <summary>
+        /// Metodo no implementado
+        /// </summary>
+        /// <param name="creado"></param>
         public void VerificarCreacionJugador(bool creado)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo para verificar el envio de correo
+        /// </summary>
+        /// <param name="enviado"></param>
         public void VerificarEnvioDeCorreo(bool enviado)
         {
             this.correoEnviado = enviado;
         }
 
+        /// <summary>
+        /// Metodo para verificar el envio del correo
+        /// </summary>
+        /// <returns></returns>
         public bool validarCorreoElectronico()
         {
             try

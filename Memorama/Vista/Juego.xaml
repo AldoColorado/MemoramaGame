@@ -28,13 +28,16 @@
         <ItemsControl x:Name ="Itc" ItemsSource="{Binding tablero.rectangulos}" Margin="0,0,194.2,0.2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas x:Name="Canvas2" Height="782" Width="1302" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="Canvas2_MouseLeftButtonDown"/>
+                    <Canvas x:Name="Canvas2" Height="782" Width="1302" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            MouseLeftButtonDown="Canvas2_MouseLeftButtonDown"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <StackPanel x:Name="SP1" Height="153" Margin="1189,0,-31.8,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="190">
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="PARES FALTANTES:" Margin="0,20,-1.6,0" Height="19" FontWeight="Bold" TextAlignment="Center"/>
-            <TextBlock x:Name="RemainingTB" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,16,-0.6,0" Height="37" Text="{Binding paresRestantes}" FontWeight="Bold" TextAlignment="Center" RenderTransformOrigin="0.518,-0.39"/>
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="PARES FALTANTES:" Margin="0,20,-1.6,0" Height="19" FontWeight="Bold" 
+                       TextAlignment="Center"/>
+            <TextBlock x:Name="RemainingTB" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,16,-0.6,0" Height="37" 
+                       Text="{Binding paresRestantes}" FontWeight="Bold" TextAlignment="Center" RenderTransformOrigin="0.518,-0.39"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Margin="1304,758,-32,0" Width="75">
         </StackPanel>
@@ -67,6 +70,5 @@
                 HorizontalAlignment="Right" Margin="0,680,47.6,67.2" Click="botonSalir" Height="Auto"/>
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="REPORTAR JUGADOR" Width="166" 
                 HorizontalAlignment="Right" Margin="0,536,23.6,223.2" Click="botonReportar" Height="Auto"/>
-
     </Grid>
 </Window>

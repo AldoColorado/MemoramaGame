@@ -30,6 +30,12 @@ namespace Memorama.Vista
         ObservableCollection<Jugador> jugadoresEnLinea;
         Partida partida;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="jugadores">Coleccion de jugadores conectados a la partida</param>
+        /// <param name="jugador">Jugador en el juego</param>
+        /// <param name="codigoPartida">codigo de la partida que se ha creado</param>
         public PrePartida(ObservableCollection<Jugador> jugadores, Jugador jugador, string codigoPartida)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -37,14 +43,11 @@ namespace Memorama.Vista
 
             jugadoresEnLinea = new ObservableCollection<Jugador>();
             this.jugadoresEnLinea = jugadores;
-
             partida = new Partida();
             this.jugador = jugador;
             contexto = new InstanceContext(this);
             servidor = new ProxyPartida.PartidaServiceClient(contexto);
             partida.codigo = codigoPartida;
-            
-
             jugadoresConectados = new ObservableCollection<Jugador>();
             numerosOrdenCartas = new ObservableCollection<int>();
 
@@ -62,9 +65,12 @@ namespace Memorama.Vista
             jugadoresUnidos.ItemsSource = jugadoresConectados;
         }
 
+        /// <summary>
+        /// Metodo para actualizar los jugadores que se conectan a la partida
+        /// </summary>
+        /// <param name="jugadores">Arreglo de jugadores conectados</param>
         public void JugadoresEnPartida(Jugador[] jugadores)
         {
-
             jugadoresConectados.Clear();
 
             foreach(Jugador c in jugadores)
@@ -73,6 +79,11 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Metodo para jugar la partida
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonJugar(object sender, RoutedEventArgs e)
         {
             Juego ventana = new Juego(juego, jugador, partida, jugadoresEnLinea);
@@ -80,12 +91,20 @@ namespace Memorama.Vista
             ventana.Show();
         }
 
+        /// <summary>
+        /// Metodo para regresar al lobby
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegresarAlLobby(object sender, RoutedEventArgs e)
         {
             servidor.DesconectarseDePartida(jugador);
             AbrirVentanaLobby();
         }
 
+        /// <summary>
+        /// Metodo para abrir la ventana del lobby
+        /// </summary>
         public void AbrirVentanaLobby()
         {
             Lobby ventanLobby = new Lobby(jugadoresEnLinea, jugador);
@@ -93,6 +112,10 @@ namespace Memorama.Vista
             ventanLobby.Show();
         }
 
+        /// <summary>
+        /// Metodo para actualizar el orden de las cartas
+        /// </summary>
+        /// <param name="numeros">Arreglo de numeros para establer el orden</param>
         public void OrdenCartas(int[] numeros)
         {
             numerosOrdenCartas.Clear();
@@ -105,6 +128,5 @@ namespace Memorama.Vista
             juego.InicializarOrdenCartas(numerosOrdenCartas);
         }
 
-        
     }
 }

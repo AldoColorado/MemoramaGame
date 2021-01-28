@@ -29,6 +29,11 @@ namespace Memorama.Vista
         ProxyPartida.PartidaServiceClient servidor;
         ObservableCollection<Jugador> jugadoresConectados;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="jugadores">Jugadores conectados al juego</param>
+        /// <param name="jugador">Jugador en en juego actual</param>
         public UnirseAPartida(ObservableCollection<Jugador> jugadores, Jugador jugador)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -42,6 +47,11 @@ namespace Memorama.Vista
 
         }
 
+        /// <summary>
+        /// Evento del boton unirse
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonUnirse(object sender, RoutedEventArgs e)
         {
             IngresarCodigo();
@@ -64,8 +74,7 @@ namespace Memorama.Vista
                     PrePartida ventanaPrePartida = new PrePartida(jugadoresConectados, jugador, codigoPartida);
                     ventanaPrePartida.Show();
                     Window.GetWindow(this).Close();
-                }
-               
+                }  
             }
             else
             {
@@ -73,22 +82,38 @@ namespace Memorama.Vista
             }   
         }
 
+        /// <summary>
+        /// Metodo para inicializar el codigo ingresado de la partida
+        /// </summary>
         public void IngresarCodigo()
         {
             codigoPartida = TextoCodigo.Text;
             partida.codigo = TextoCodigo.Text;
         }
 
+        /// <summary>
+        /// Metodo para verificar los jugadores en la partida
+        /// </summary>
+        /// <param name="jugadores"></param>
         public void JugadoresEnPartida(Jugador[] jugadores)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Meodo no implementado
+        /// </summary>
+        /// <param name="numeros">Orden de las cartas</param>
         public void OrdenCartas(int[] numeros)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Evento del boton regresar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegresar(object sender, RoutedEventArgs e)
         {
             Lobby lobby = new Lobby(jugadoresConectados, jugador);

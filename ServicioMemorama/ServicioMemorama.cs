@@ -52,8 +52,7 @@ namespace ServicioMemorama
 
         public void Conectarse(Jugador jugador)
         {
-            Console.WriteLine("Si entro aqui");
-
+            
             try
             {
                 if(!BuscarClientePorNombre(jugador.nickName))
@@ -338,7 +337,6 @@ namespace ServicioMemorama
 
             if(estadisticaPartidaDAO.Crear(estadisticaPartida))
             {
-                Console.WriteLine("Pues si se crea lol");
                 creada = true;
             }
            
@@ -442,7 +440,6 @@ namespace ServicioMemorama
                 {
                     nums += n;
                 }
-                Console.WriteLine(nums);
             }
         }
     }

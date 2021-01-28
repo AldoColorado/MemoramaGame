@@ -25,12 +25,20 @@ namespace Memorama
         public bool correoEnviado;
         public bool jugadorEncontrado;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public RecuperarContrasenia()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Boton para continuar en el cambio de contrasenia
+        /// </summary>
+        /// <param name="sender">Propiedad de la clase</param>
+        /// <param name="e">Propiedad de la clase</param>
         private void BotonContinuar(object sender, RoutedEventArgs e)
         {
             ProxyRecuperarContrasenia.RecuperarContraseniaServiceClient servidor = new ProxyRecuperarContrasenia.RecuperarContraseniaServiceClient();
@@ -59,6 +67,9 @@ namespace Memorama
            
         }
 
+        /// <summary>
+        /// Metodo para generar el codigo de recuperacion de contrasenia
+        /// </summary>
         public void GenerarCodigoRecuperacion()
         {
             var seed = Environment.TickCount;

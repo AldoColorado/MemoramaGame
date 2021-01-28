@@ -27,14 +27,15 @@
             <TextBlock Text="" Margin="20,4 0, 0"></TextBlock>
         </materialDesign:ColorZone>
 
-        <Button Style="{DynamicResource MaterialDesignRaisedDarkButton}" Content="GENERAR CODIGO DE PARTIDA" Width="286" HorizontalAlignment="Right" Margin="0,82,477.6,304" Click="BotonCrearPartida" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedDarkButton}" Content="INICIAR PARTIDA" Width="286" HorizontalAlignment="Right" Margin="0,154,477.6,232" Click="BotonIniciarPartida" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedDarkButton}" Content="REGRESAR" Width="286" HorizontalAlignment="Right" Margin="0,302,477.6,84" Click="BotonRegresar" Height="Auto"/>
-
+        <Button Style="{DynamicResource MaterialDesignRaisedDarkButton}" Content="GENERAR CODIGO DE PARTIDA" Width="286" 
+                HorizontalAlignment="Right" Margin="0,82,477.6,304" Click="BotonCrearPartida" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedDarkButton}" Content="INICIAR PARTIDA" Width="286" 
+                HorizontalAlignment="Right" Margin="0,154,477.6,232" Click="BotonIniciarPartida" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedDarkButton}" Content="REGRESAR" Width="286" 
+                HorizontalAlignment="Right" Margin="0,302,477.6,84" Click="BotonRegresar" Height="Auto"/>
 
         <materialDesign:ColorZone Mode="Standard" Margin="342,82,9.6,0" Height="34">
             <TextBlock x:Name="TxtCodigo" Margin="20,4 0, 0"></TextBlock>
         </materialDesign:ColorZone>
-        
     </Grid>
 </Window>

@@ -14,6 +14,9 @@ using System.Windows.Threading;
 
 namespace Memorama
 {
+    /// <summary>
+    /// La clase JuegoMemorama se utiliza para dar funcionalidad a la ventana de Juego.
+    /// </summary>
     public class JuegoMemorama : INotifyPropertyChanged
     {
         public Tablero tablero { get; } = new Tablero();
@@ -25,18 +28,28 @@ namespace Memorama
         string nombreDeLaCarta;
 
         DispatcherTimer tiempoCartasVolteadas = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
-
         bool bloquearClick = false;
         int click = 0;
-        int columna, fila, columna1, columna2, fila1, fila2;
+        int columna;
+        int fila;
+        int columna1;
+        int columna2;
+        int fila1;
+        int fila2;
         int paresDeCartas;
         public int paresRestantes { get { return paresDeCartas; } set { paresDeCartas = value; NotificarCambio("paresRestantes"); } }
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public JuegoMemorama()
         {
             tiempoCartasVolteadas.Tick += CubrirORemoverCartas;
         }
 
+        /// <summary>
+        /// Metodo donde se inicializan otro metodos de la misma clase y se ejecutan metodos de la ckase Tablero
+        /// </summary>
         public void NuevoJuego()
         {
             CrearListaDeCartas();
@@ -47,6 +60,9 @@ namespace Memorama
             paresRestantes = contadorParesDeCartas;
         }
 
+        /// <summary>
+        /// Metodo donde se inician otros metodos de la clase tablero, aqui mismo se inicializa el tiempo para la cartas volteadas.
+        /// </summary>
         private void CubrirORemoverCartas(object sender, EventArgs e)
         {
             tablero.DibujarArregloCoverturasDeImagenes();
@@ -54,6 +70,9 @@ namespace Memorama
             bloquearClick = false;
         }
 
+        /// <summary>
+        /// Metodo que crea la lista de cartas necesaria para desplegarse dentro del tablero
+        /// </summary>
         private void CrearListaDeCartas()
         {
             listaDeCartas.Clear();
@@ -74,6 +93,12 @@ namespace Memorama
             }
         }
 
+        /// <summary>
+        /// Metodo donde se controla la accion del click dentro del tablero.
+        /// </summary>
+        /// <param name="x">representa la posicion vertical del click</param>
+        /// <param name="y">representa la posicion horizontal del click</param>
+        /// <returns>Regresa el resultado al comparar un par de cartas</returns>
         public bool Click(double x, double y)
         {
             bool resultadoCartasVolteadas = false;
@@ -140,6 +165,14 @@ namespace Memorama
             return resultadoCartasVolteadas;
         }
 
+        /// <summary>
+        /// Compara un par de cartas elegidas por un jugador
+        /// </summary>
+        /// <param name="columna1">columna de la carta 1</param>
+        /// <param name="fila1">fila de la carta 1</param>
+        /// <param name="columna2">columna de la carta 2</param>
+        /// <param name="fila2">fila de la carta 2</param>
+        /// <returns>Regresa verdadero en caso de que las cartas sean las mismas</returns>
         private bool CompararCartasElegidas(int columna1, int fila1, int columna2, int fila2)
         {
             int numero1 = tablero.arregloDeCartas[columna1, fila1].numero;
@@ -154,6 +187,10 @@ namespace Memorama
                 return false;
         }
 
+        /// <summary>
+        /// Inicializa el arreglo de cartas donde se asigna el orden de cada una de ellas
+        /// </summary>
+        /// <param name="numeros">Arreglo de 54 numeros ordenados aleatoriamente</param>
         public void InicializarOrdenCartas(ObservableCollection<int> numeros)
         {
             numerosOrdenCartas.Clear();
@@ -163,6 +200,10 @@ namespace Memorama
             }
         }
 
+        /// <summary>
+        /// Metodo en el cual se controla dinamicamente el cambio de la propiedad "paresrestantes"
+        /// </summary>
+        /// <param name="propiedadQueCambia">Propiedad a la cual se le notificara el cambio</param>
         protected void NotificarCambio(string propiedadQueCambia)
         {
             if(PropertyChanged != null)

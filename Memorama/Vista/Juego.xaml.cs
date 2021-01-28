@@ -35,15 +35,18 @@ namespace Memorama.Vista
         EstadisticaPartida estadisticaJugador;
         int statusReporteJugador = 0;
         string jugadorReportado = "";
-        
-
-
-
         ObservableCollection<int> numeros = new ObservableCollection<int>();
         ObservableCollection<int> puntajesJugadores;
         ObservableCollection<Jugador> jugadoresJuego;
         ObservableCollection<string> jugadoresEnLinea;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="juego">Clase de la funcionalidad de la ventana</param>
+        /// <param name="jugador">Jugador actual</param>
+        /// <param name="partida">Partida en curso</param>
+        /// <param name="jugadoresConectados">Coleccion de jugadores concetados</param>
         public Juego(JuegoMemorama juego, Jugador jugador, Partida partida, ObservableCollection<Jugador> jugadoresConectados)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -54,10 +57,7 @@ namespace Memorama.Vista
             contextoEstadisticas = new InstanceContext(this);
             servidor = new ProxyJuego.JuegoServiceClient(contexto);
             servidorEstadisticas = new ProxyEstadisticas.EstadisticasServiceClient();
-            
-
             this.partida = partida;
-
             jugadoresJuego = new ObservableCollection<Jugador>();
             puntajesJugadores = new ObservableCollection<int>();
             jugadoresEnLinea = new ObservableCollection<string>();
@@ -81,12 +81,20 @@ namespace Memorama.Vista
             puntajes.ItemsSource = puntajesJugadores;
         }
 
+        /// <summary>
+        /// Evento de carga de la ventana
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = juego;
             NuevoJuego();
         }
 
+        /// <summary>
+        /// Clase para crear un nuevo juego
+        /// </summary>
         private void NuevoJuego()
         {
             try
@@ -100,6 +108,11 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Evento de clic del Raton
+        /// </summary>
+        /// <param name="sender">Propieadad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void Canvas2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             bool resultadoCartasVolteadas = false;
@@ -117,16 +130,24 @@ namespace Memorama.Vista
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                MessageBox.Show(ex.ToString());
                 throw;
             }
         }
 
+        /// <summary>
+        /// Metodo para mostrar el movimiento de las cartas en todos los jugadores conectados
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MostrarMovimiento(double x, double y)
         {
             juego.Click(x, y);
         }
 
+        /// <summary>
+        /// Metodo para crear el orden de las cartas
+        /// </summary>
+        /// <param name="numeros">Arreglo de numeros </param>
         public void OrdenCartas(int[] numeros)
         {
             foreach(int n in numeros)
@@ -135,6 +156,10 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Metodo para actualizar los jugadores conectados
+        /// </summary>
+        /// <param name="jugadores">Lista de jugadores conectados</param>
         public void JugadoresEnJuego(Jugador[] jugadores)
         {
             jugadoresJuego.Clear();
@@ -145,6 +170,10 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Metodo par actualizar los puntajes de la tabla
+        /// </summary>
+        /// <param name="puntajes">Arreglo de puntajes</param>
         public void ActualizarPuntajes(int[] puntajes)
         {
             puntajesJugadores.Clear();
@@ -155,6 +184,11 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Evento para el boton salir
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void botonSalir(object sender, RoutedEventArgs e)
         {
             AsignarPuntajes();
@@ -173,6 +207,9 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Metodo para asignar puntajes a jugadores cuando se termina la partida
+        /// </summary>
         public void AsignarPuntajes()
         {
             int paresJugador = 0;
@@ -202,6 +239,11 @@ namespace Memorama.Vista
             estadisticaJugador.puntaje = paresJugador;
         }
 
+        /// <summary>
+        /// Evento del boton reportar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void botonReportar(object sender, RoutedEventArgs e)
         {
             if(jugadorReportado != null)
@@ -221,6 +263,11 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Evento de seleccion de la tabla
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void Seleccion(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -234,6 +281,9 @@ namespace Memorama.Vista
             }
         }
 
+        /// <summary>
+        /// Metodo para actualizar el reporte del jugador
+        /// </summary>
         public void ActualizarReporteJugador()
         {
             statusReporteJugador++;

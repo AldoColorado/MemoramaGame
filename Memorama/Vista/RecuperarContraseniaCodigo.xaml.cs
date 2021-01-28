@@ -21,6 +21,12 @@ namespace Memorama
     {
         string correo;
         string codigo;
+
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="codigo">Codigo de recuperacion</param>
+        /// <param name="correo">correo para recuperar la contrasenia</param>
         public RecuperarContraseniaCodigo(string codigo, string correo)
         {
             this.codigo = codigo;
@@ -29,6 +35,11 @@ namespace Memorama
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Evento del boton continuar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonContinuar(object sender, RoutedEventArgs e)
         {
             string codigoIngresado = TextoCodigo.Text;

@@ -34,6 +34,11 @@ namespace Memorama.Vista
         ProxyEstadisticas.EstadisticasServiceClient servidor;
         Tabla[] tablaPuntajes;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="jugadores">Collecion de jugadores conectados</param>
+        /// <param name="jugador">Jugador actualmente logeado</param>
         public Puntajes(ObservableCollection<Jugador> jugadores, Jugador jugador)
         {
             InitializeComponent();
@@ -72,6 +77,11 @@ namespace Memorama.Vista
             listaViewPuntajes.ItemsSource = coleccionTabla;
         }
 
+        /// <summary>
+        /// Evento click del boton regresar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegresar(object sender, RoutedEventArgs e)
         {
             Lobby ventanLobby = new Lobby(jugadoresConectados, jugador);
@@ -79,12 +89,13 @@ namespace Memorama.Vista
             ventanLobby.Show();
         }
 
+        /// <summary>
+        /// Metodo para inicializar a los jugadores 
+        /// </summary>
         public void InicializarCollecionJugadores()
         {
             try
             {
-                //servidor.ObtenerListaDeJugadores();
-
                 foreach(var j in jugadores)
                 {
                     listaJugadores.Add(j);
@@ -97,36 +108,13 @@ namespace Memorama.Vista
 
         }
 
-        //public void InicializarCollecionPuntajes()
-        //{
-        //    try
-        //    {
-        //        if(servidor.ObtenerPuntajesJugadores()!= null)
-        //        {
-                   
-        //        }
-
-
-
-        //        //foreach(var t in tablaPuntajes)
-        //        //{
-        //        //    tabla.Add(t);
-        //        //    string cadena = t.puntaje.ToString();
-        //        //    MessageBox.Show(cadena);
-        //        //}
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-
-        //}
-
+        /// <summary>
+        /// Metodo no implementado
+        /// </summary>
         public void MostrarEstadistica()
         {
             throw new NotImplementedException();
         }
-
 
     }
 }

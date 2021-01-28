@@ -24,10 +24,14 @@ namespace Memorama
     public partial class ConfirmarRegistro : ProxyRegistro.IRegistroServiceCallback
     {
    
-        private bool creado;
         private Jugador jugador;
         private string codigo;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="jugador">Jugador a registrarse</param>
+        /// <param name="codigo">Codigo de registro</param>
         public ConfirmarRegistro(Jugador jugador, string codigo)
         {
             this.jugador = jugador;
@@ -37,24 +41,41 @@ namespace Memorama
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Metodo no implementado
+        /// </summary>
+        /// <param name="creado">Verdader en caso de jugador creado</param>
         public void VerificarCreacionJugador(bool creado)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo no implementado
+        /// </summary>
+        /// <param name="enviado">Verdadero si se envia el correo</param>
         public void VerificarEnvioDeCorreo(bool enviado)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Propiedad de la ventana
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
+        /// <summary>
+        /// Evento del boton registrar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegistrarse(object sender, RoutedEventArgs e)
         {
-
             if(codigo == TextoCodigo.Text)
             {
                 InstanceContext contexto = new InstanceContext(this);
@@ -77,15 +98,18 @@ namespace Memorama
                     MessageBox.Show("El servidor no se encuentra disponible");
                     Window.GetWindow(this).Close();
                 }
-
             }
             else
             {
                 MessageBox.Show("El codigo ingresado no coincide con el que te fue proporcionado");
             }
-
         }
 
+        /// <summary>
+        /// Evento del boton regresar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegresar(object sender, RoutedEventArgs e)
         {
             Login login = new Login();

@@ -32,12 +32,13 @@
             <TextBlock Name="TxtJugador" Margin="0,4,110,-0.2"></TextBlock>
         </materialDesign:ColorZone>
 
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="CREAR PARTIDA" Width="286" HorizontalAlignment="Right" Margin="0,82,477.6,304" Click="BotonCrearPartida" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="UNIRSE A PARTIDA" Width="286" HorizontalAlignment="Right" Margin="0,131,477.6,255" Click="BotonUnirseAPartida" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="SALIR" Width="286" HorizontalAlignment="Right" Margin="0,344,477.6,42" Click="BotonSalir" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="VER PUNTAJES DE JUGADORES" Width="286" HorizontalAlignment="Right" Margin="0,193,477.6,193" Click="BotonPuntajes" Height="Auto"/>
-
-        
-
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="CREAR PARTIDA" Width="286" 
+                HorizontalAlignment="Right" Margin="0,82,477.6,304" Click="BotonCrearPartida" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="UNIRSE A PARTIDA" Width="286" 
+                HorizontalAlignment="Right" Margin="0,131,477.6,255" Click="BotonUnirseAPartida" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="SALIR" Width="286" 
+                HorizontalAlignment="Right" Margin="0,344,477.6,42" Click="BotonSalir" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="VER PUNTAJES DE JUGADORES" Width="286" 
+                HorizontalAlignment="Right" Margin="0,193,477.6,193" Click="BotonPuntajes" Height="Auto"/>
     </Grid>
 </Window>

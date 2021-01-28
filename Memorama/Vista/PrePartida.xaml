@@ -25,8 +25,10 @@
             <TextBlock Text="" Margin="20,4 0, 0"></TextBlock>
         </materialDesign:ColorZone>
 
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="JUGAR" Width="211" HorizontalAlignment="Right" Margin="0,118,85.6,252" Click="BotonJugar" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="REGRESAR AL LOBBY" Width="211" HorizontalAlignment="Right" Margin="0,282,85.6,88" Click="BotonRegresarAlLobby" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="JUGAR" Width="211" 
+                HorizontalAlignment="Right" Margin="0,118,85.6,252" Click="BotonJugar" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="REGRESAR AL LOBBY"
+                Width="211" HorizontalAlignment="Right" Margin="0,282,85.6,88" Click="BotonRegresarAlLobby" Height="Auto"/>
 
         
         <ListView Name="jugadoresUnidos" Margin="33,118,391.6,154">

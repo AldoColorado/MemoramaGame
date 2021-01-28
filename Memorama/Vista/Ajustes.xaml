@@ -32,15 +32,20 @@
 
             <Grid Grid.Row="1">
                 <materialDesign:ColorZone Mode="PrimaryMid">
-                    <TextBlock Text="{x:Static idioma:Idioma.ventanaAjustes}" HorizontalAlignment="Left" FontSize="23" VerticalAlignment="Bottom" Margin="20, 30, 0, 10"></TextBlock>
+                    <TextBlock Text="{x:Static idioma:Idioma.ventanaAjustes}" HorizontalAlignment="Left" FontSize="23" 
+                               VerticalAlignment="Bottom" Margin="20, 30, 0, 10"></TextBlock>
                 </materialDesign:ColorZone>
             </Grid>
 
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <materialDesign:PackIcon Kind="Flag" Foreground="{Binding ElementName=ComboBoxLenguaje, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0, 6"></materialDesign:PackIcon>
-                        <ComboBox Name="ComboBoxLenguaje" SelectionChanged="ComboBoxLenguajeSelectionChanged" Style="{DynamicResource MaterialDesignComboBox}" Width="230" materialDesign:HintAssist.Hint="{x:Static idioma:Idioma.cambiarIdioma}" materialDesign:HintAssist.IsFloating="True">
+                        <materialDesign:PackIcon Kind="Flag" Foreground="{Binding ElementName=ComboBoxLenguaje, Path=BorderBrush}" 
+                                                 VerticalAlignment="Bottom" Margin="0, 6"></materialDesign:PackIcon>
+                        <ComboBox Name="ComboBoxLenguaje" SelectionChanged="ComboBoxLenguajeSelectionChanged"
+                                  Style="{DynamicResource MaterialDesignComboBox}" Width="230" 
+                                  materialDesign:HintAssist.Hint="{x:Static idioma:Idioma.cambiarIdioma}" 
+                                  materialDesign:HintAssist.IsFloating="True">
                             <ComboBoxItem Content="{x:Static idioma:Idioma.es}"/>
                             <ComboBoxItem Content="{x:Static idioma:Idioma.en}"/>
                         </ComboBox>

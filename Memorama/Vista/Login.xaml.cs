@@ -34,7 +34,9 @@ namespace Memorama
         InstanceContext contexto;
         ProxyLogin.LoginServiceClient servidor;
 
-
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public Login()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -47,11 +49,21 @@ namespace Memorama
             servidor = new ProxyLogin.LoginServiceClient(contexto);
         }
 
+        /// <summary>
+        /// Metodo que maneja el evento de movimiento de la pantalla
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
+        /// <summary>
+        /// Metodo para abrir la ventana de ajustes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BotonAjustes(object sender, RoutedEventArgs e)
         {
             Ajustes ventanaAjustes = new Ajustes();
@@ -59,6 +71,11 @@ namespace Memorama
 
         }
 
+        /// <summary>
+        /// Metodo para ingresar a el lobby del juego
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BotonIngresar(object sender, RoutedEventArgs e)
         {
             Jugador jugador = new Jugador();
@@ -76,6 +93,11 @@ namespace Memorama
             } 
         }
 
+        /// <summary>
+        /// Metodo que abre la ventana de registrarse
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRegistrarse(object sender, RoutedEventArgs e)
         {
             Registrarse ventanaRegistrase = new Registrarse();
@@ -83,6 +105,11 @@ namespace Memorama
             ventanaRegistrase.Show();
         }
 
+        /// <summary>
+        /// Meotdo que abre la ventana de recuperar contrasenia
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonRecuperarContrasenia(object sender, RoutedEventArgs e)
         {
             RecuperarContrasenia ventanaRecuperarContrasenia = new RecuperarContrasenia();
@@ -90,11 +117,19 @@ namespace Memorama
             ventanaRecuperarContrasenia.Show();
         }
 
+        /// <summary>
+        /// Metodo para verificar si es correcto el logeo del jugador
+        /// </summary>
+        /// <param name="logeado">Verdadero cuando sus creedenciales son correctas</param>
         public void VerificarUsuarioLogeado(bool logeado)
         {
             this.aceptado = logeado;
         }
 
+        /// <summary>
+        /// Metodo para logearse dentro del sistema
+        /// </summary>
+        /// <returns>Regresa verdadero en caso de que las creedenciales sean correctas</returns>
         public bool Logearse()
         {
             bool logeado = false;
@@ -113,6 +148,10 @@ namespace Memorama
             return logeado;
         }
 
+        /// <summary>
+        /// Metodo para conctarse al servidor
+        /// </summary>
+        /// <param name="jugador">Jugador que va a conectarse</param>
         public void Conectarse(Jugador jugador)
         {
             bool yaEstaConectado = false;
@@ -146,6 +185,10 @@ namespace Memorama
             }
         }
 
+        /// <summary>
+        /// Metodo para actualizar los jugadores que se conectan al servidor
+        /// </summary>
+        /// <param name="jugadores">Arreglo de jugadores conectados</param>
         public void UsuariosConectados(Jugador[] jugadores)
         {
             jugadoresConectados.Clear();
@@ -157,6 +200,10 @@ namespace Memorama
 
         }
 
+        /// <summary>
+        /// Metodo para abrir la ventana de Lobby
+        /// </summary>
+        /// <param name="jugador">Jugador que se ha logeado</param>
         public void MostrarVentanaLoby(Jugador jugador)
         {
             Lobby ventanaLobby = new Lobby(jugadoresConectados, jugador);

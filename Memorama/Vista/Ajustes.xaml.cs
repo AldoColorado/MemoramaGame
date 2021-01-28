@@ -19,18 +19,31 @@ namespace Memorama
     /// </summary>
     public partial class Ajustes : Window
     {
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public Ajustes()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Evento del boton aplicar
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void BotonAplicar(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// Evento de la seleccion
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         private void ComboBoxLenguajeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(ComboBoxLenguaje.SelectedIndex == 0)

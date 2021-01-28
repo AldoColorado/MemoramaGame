@@ -22,6 +22,11 @@ namespace Memorama
     public partial class CambiarContrasenia : Window
     {
         string correo;
+
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="correo">Correo para envio de confirmacion</param>
         public CambiarContrasenia(string correo)
         {
             this.correo = correo;
@@ -29,6 +34,11 @@ namespace Memorama
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Evento del boton cambiar contrasenia
+        /// </summary>
+        /// <param name="sender">Propiedad del evento</param>
+        /// <param name="e">Propiedad del evento</param>
         public void BotonCambiarContrasenia(object sender, RoutedEventArgs e)
         {
             bool seActualizoContrasenia = false;
