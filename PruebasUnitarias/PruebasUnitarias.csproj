@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoDeDatos\PruebasEstadisticaPartidaDAO.cs" />
     <Compile Include="AccesoDeDatos\PruebasJugadorDAO.cs" />
     <Compile Include="AccesoDeDatos\PruebasPartidaDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

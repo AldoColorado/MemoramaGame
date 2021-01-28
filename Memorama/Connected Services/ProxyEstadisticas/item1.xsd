@@ -80,4 +80,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfJugador" nillable="true" type="tns:ArrayOfJugador" />
+  <xs:complexType name="ArrayOfTabla">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tabla" nillable="true" type="tns:Tabla" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTabla" nillable="true" type="tns:ArrayOfTabla" />
+  <xs:complexType name="Tabla">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="jugador" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="puntaje" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tabla" nillable="true" type="tns:Tabla" />
 </xs:schema>

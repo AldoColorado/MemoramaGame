@@ -51,18 +51,24 @@ namespace Modelo
         public override bool Eliminar(string pk)
         {
             bool eliminado = false;
-
-            Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(pk)).First<Jugador>();
-
-            if(buscar == null)
+            try
             {
-                throw new ArgumentException("Usuario no encontrado en la base de datos");
+                Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(pk)).First<Jugador>();
+
+                if(buscar == null)
+                {
+                    throw new ArgumentException("Usuario no encontrado en la base de datos");
+                }
+                else
+                {
+                    db.Jugador.Remove(buscar);
+                    db.SaveChanges();
+                    eliminado = true;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                db.Jugador.Remove(buscar);
-                db.SaveChanges();
-                eliminado = true;
+
             }
 
             return eliminado;

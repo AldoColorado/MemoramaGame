@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,32 +19,72 @@ namespace Memorama.Vista
     /// <summary>
     /// Lógica de interacción para UnirseAPartida.xaml
     /// </summary>
-    public partial class UnirseAPartida
+    public partial class UnirseAPartida : ProxyPartida.IPartidaServiceCallback
     {
-        private string codigoPartida = "";
-        private Jugador jugador;
+        Jugador jugador;
+        Partida partida;
+        string codigoPartida = "";
+        InstanceContext contexto;
+        ProxyPartida.PartidaServiceClient servidor;
 
         public UnirseAPartida(Jugador jugador)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.jugador = jugador;
+            partida = new Partida();
+            contexto = new InstanceContext(this);
+            servidor = new ProxyPartida.PartidaServiceClient(contexto);
 
-            IngresarCodigo();
         }
 
         private void BotonUnirse(object sender, RoutedEventArgs e)
         {
-            codigoPartida = TextoCodigo.Text;
+            IngresarCodigo();
+            bool estadisticaCreada = false;
 
-            PrePartida ventanaPrePartida = new PrePartida(jugador, codigoPartida);
-            ventanaPrePartida.Show();
-            Window.GetWindow(this).Close();
+            if(servidor.ComprobarCodigoPartida(codigoPartida))
+            {
+                try
+                {
+                    servidor.CrearEstadisticaPartida(partida, jugador);
+                    estadisticaCreada = true;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("No existe partida en curso");
+                }
+
+                if(estadisticaCreada)
+                {
+                    PrePartida ventanaPrePartida = new PrePartida(jugador, codigoPartida);
+                    ventanaPrePartida.Show();
+                    Window.GetWindow(this).Close();
+                }
+               
+            }
+            else
+            {
+                MessageBox.Show("El codigo no corresponde a ninguna partida en curso");
+            }
+
+           
         }
 
         public void IngresarCodigo()
         {
             codigoPartida = TextoCodigo.Text;
+            partida.codigo = TextoCodigo.Text;
+        }
+
+        public void JugadoresEnPartida(Jugador[] jugadores)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OrdenCartas(int[] numeros)
+        {
+            throw new NotImplementedException();
         }
     }
 }

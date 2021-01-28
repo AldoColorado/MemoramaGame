@@ -73,7 +73,7 @@ namespace Memorama
             {
                 string msj1 = this.recurso.GetString("vLoginMsj1");
                 MessageBox.Show(msj1);
-            }
+            } 
         }
 
         private void BotonRegistrarse(object sender, RoutedEventArgs e)
@@ -107,8 +107,6 @@ namespace Memorama
             {
                 string msj2 = this.recurso.GetString("vLoginMsj2");
                 MessageBox.Show(msj2);
-                MessageBox.Show(ex.ToString());
-
                 Application.Current.Shutdown();
             }
 
@@ -150,7 +148,6 @@ namespace Memorama
 
         public void UsuariosConectados(Jugador[] jugadores)
         {
-
             jugadoresConectados.Clear();
 
             foreach(Jugador c in jugadores)

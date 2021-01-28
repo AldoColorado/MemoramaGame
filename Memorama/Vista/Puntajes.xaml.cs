@@ -20,25 +20,26 @@ namespace Memorama.Vista
     /// <summary>
     /// Lógica de interacción para Puntajes.xaml
     /// </summary>
-    public partial class Puntajes : ProxyEstadisticas.IEstadisticasServiceCallback
+    public partial class Puntajes
     {
         ObservableCollection<Jugador> listaJugadores;
+        ObservableCollection<Tabla> coleccionTabla;
         ObservableCollection<int> listaPuntajes;
         Jugador[] jugadores;
         int[] puntajes;
+        string[] players;
         InstanceContext contexto;
         ProxyEstadisticas.EstadisticasServiceClient servidor;
+        Tabla[] tablaPuntajes;
 
         public Puntajes()
         {
             InitializeComponent();
-            contexto = new InstanceContext(this);
-            servidor = new ProxyEstadisticas.EstadisticasServiceClient(contexto);
 
-            listaJugadores = new ObservableCollection<Jugador>();
-            listaPuntajes = new ObservableCollection<int>();
-            jugadores = new Jugador[100];
-            puntajes = new int[100];
+            servidor = new ProxyEstadisticas.EstadisticasServiceClient();
+            puntajes = new int[2];
+            players = new string[10];
+            coleccionTabla = new ObservableCollection<Tabla>();
 
             try
             {
@@ -50,10 +51,21 @@ namespace Memorama.Vista
                 MessageBox.Show(ex.ToString());
             }
 
-            InicializarCollecionJugadores();
-            InicializarCollecionPuntajes();
+            puntajes = servidor.ObtenerPuntaje();
+            players = servidor.ObtenerJugadores();
 
-            int i = 0;
+            int contadorLista = 0;
+            foreach(var p in players)
+            {
+                Tabla tabla = new Tabla();
+                tabla.jugador = p;
+                tabla.puntaje = puntajes[contadorLista];
+                coleccionTabla.Add(tabla);
+                contadorLista++;
+            }
+
+            listaViewPuntajes.Items.Clear();
+            listaViewPuntajes.ItemsSource = coleccionTabla;
         }
 
         private void BotonRegresar(object sender, RoutedEventArgs e)
@@ -65,7 +77,7 @@ namespace Memorama.Vista
         {
             try
             {
-                servidor.ObtenerListaDeJugadores();
+                //servidor.ObtenerListaDeJugadores();
 
                 foreach(var j in jugadores)
                 {
@@ -79,23 +91,30 @@ namespace Memorama.Vista
 
         }
 
-        public void InicializarCollecionPuntajes()
-        {
-            try
-            {
-                servidor.ObtenerPuntajesJugadores();
+        //public void InicializarCollecionPuntajes()
+        //{
+        //    try
+        //    {
+        //        if(servidor.ObtenerPuntajesJugadores()!= null)
+        //        {
+                   
+        //        }
 
-                foreach(var j in puntajes)
-                {
-                    listaPuntajes.Add(j);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
 
-        }
+
+        //        //foreach(var t in tablaPuntajes)
+        //        //{
+        //        //    tabla.Add(t);
+        //        //    string cadena = t.puntaje.ToString();
+        //        //    MessageBox.Show(cadena);
+        //        //}
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+
+        //}
 
         public void MostrarEstadistica()
         {

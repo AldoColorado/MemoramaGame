@@ -35,8 +35,6 @@ namespace Memorama
             servidor = new ProxyLogin.LoginServiceClient(contexto);
         }
 
-
-
         public void UsuariosConectados(Jugador[] jugadores)
         {
             jugadoresConectados.Clear();

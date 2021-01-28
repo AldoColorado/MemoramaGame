@@ -116,6 +116,64 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IEstadisticasService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IRecuperarContraseniaService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:9090/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -181,6 +239,12 @@
   <wsdl:message name="IPartidaService_GenerarCodigo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GenerarCodigoResponse" />
   </wsdl:message>
+  <wsdl:message name="IPartidaService_CrearEstadisticaPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearEstadisticaPartida" />
+  </wsdl:message>
+  <wsdl:message name="IPartidaService_CrearEstadisticaPartida_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearEstadisticaPartidaResponse" />
+  </wsdl:message>
   <wsdl:message name="IPartidaService_AgregarJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarJugador" />
   </wsdl:message>
@@ -220,6 +284,9 @@
   <wsdl:message name="IJuegoService_ModificarPuntajes_InputMessage">
     <wsdl:part name="parameters" element="tns:ModificarPuntajes" />
   </wsdl:message>
+  <wsdl:message name="IJuegoService_ReportarJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReportarJugador" />
+  </wsdl:message>
   <wsdl:message name="IJuegoService_MostrarMovimiento_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MostrarMovimiento" />
   </wsdl:message>
@@ -228,6 +295,57 @@
   </wsdl:message>
   <wsdl:message name="IJuegoService_ActualizarPuntajes_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ActualizarPuntajes" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoService_ActualizarReporteJugador_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarReporteJugador" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_GuardarEstadisticasPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarEstadisticasPartida" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_GuardarEstadisticasPartida_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarEstadisticasPartidaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_GenerarTablaDePuntajes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerarTablaDePuntajes" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_GenerarTablaDePuntajes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerarTablaDePuntajesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_ObtenerPuntajesJugadores_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPuntajesJugadores" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_ObtenerPuntajesJugadores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPuntajesJugadoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_ObtenerPuntaje_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPuntaje" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_ObtenerPuntaje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPuntajeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_ObtenerJugadores_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerJugadores" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasService_ObtenerJugadores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerJugadoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperarContraseniaService_ValidarJugadorPorCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarJugadorPorCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperarContraseniaService_ValidarJugadorPorCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarJugadorPorCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperarContraseniaService_EnviarCorreoRecuperacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoRecuperacion" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperarContraseniaService_EnviarCorreoRecuperacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoRecuperacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperarContraseniaService_ActualizarContrasenia_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarContrasenia" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperarContraseniaService_ActualizarContrasenia_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarContraseniaResponse" />
   </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="Login">
@@ -279,6 +397,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPartidaService/GenerarCodigo" message="tns:IPartidaService_GenerarCodigo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPartidaService/GenerarCodigoResponse" message="tns:IPartidaService_GenerarCodigo_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CrearEstadisticaPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartidaService/CrearEstadisticaPartida" message="tns:IPartidaService_CrearEstadisticaPartida_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartidaService/CrearEstadisticaPartidaResponse" message="tns:IPartidaService_CrearEstadisticaPartida_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartidaService/AgregarJugador" message="tns:IPartidaService_AgregarJugador_InputMessage" />
     </wsdl:operation>
@@ -316,6 +438,9 @@
     <wsdl:operation name="ModificarPuntajes">
       <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/ModificarPuntajes" message="tns:IJuegoService_ModificarPuntajes_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ReportarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/ReportarJugador" message="tns:IJuegoService_ReportarJugador_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="MostrarMovimiento">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/MostrarMovimiento" message="tns:IJuegoService_MostrarMovimiento_OutputCallbackMessage" />
     </wsdl:operation>
@@ -324,6 +449,45 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizarPuntajes">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/ActualizarPuntajes" message="tns:IJuegoService_ActualizarPuntajes_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarReporteJugador">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/ActualizarReporteJugador" message="tns:IJuegoService_ActualizarReporteJugador_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IEstadisticasService">
+    <wsdl:operation name="GuardarEstadisticasPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasService/GuardarEstadisticasPartida" message="tns:IEstadisticasService_GuardarEstadisticasPartida_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasService/GuardarEstadisticasPartidaResponse" message="tns:IEstadisticasService_GuardarEstadisticasPartida_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerarTablaDePuntajes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasService/GenerarTablaDePuntajes" message="tns:IEstadisticasService_GenerarTablaDePuntajes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasService/GenerarTablaDePuntajesResponse" message="tns:IEstadisticasService_GenerarTablaDePuntajes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPuntajesJugadores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadores" message="tns:IEstadisticasService_ObtenerPuntajesJugadores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadoresResponse" message="tns:IEstadisticasService_ObtenerPuntajesJugadores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPuntaje">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasService/ObtenerPuntaje" message="tns:IEstadisticasService_ObtenerPuntaje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasService/ObtenerPuntajeResponse" message="tns:IEstadisticasService_ObtenerPuntaje_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerJugadores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasService/ObtenerJugadores" message="tns:IEstadisticasService_ObtenerJugadores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasService/ObtenerJugadoresResponse" message="tns:IEstadisticasService_ObtenerJugadores_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IRecuperarContraseniaService">
+    <wsdl:operation name="ValidarJugadorPorCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreo" message="tns:IRecuperarContraseniaService_ValidarJugadorPorCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreoResponse" message="tns:IRecuperarContraseniaService_ValidarJugadorPorCorreo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreoRecuperacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacion" message="tns:IRecuperarContraseniaService_EnviarCorreoRecuperacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacionResponse" message="tns:IRecuperarContraseniaService_EnviarCorreoRecuperacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarContrasenia">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperarContraseniaService/ActualizarContrasenia" message="tns:IRecuperarContraseniaService_ActualizarContrasenia_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperarContraseniaService/ActualizarContraseniaResponse" message="tns:IRecuperarContraseniaService_ActualizarContrasenia_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -433,6 +597,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CrearEstadisticaPartida">
+      <soap12:operation soapAction="http://tempuri.org/IPartidaService/CrearEstadisticaPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AgregarJugador">
       <soap12:operation soapAction="http://tempuri.org/IPartidaService/AgregarJugador" style="document" />
       <wsdl:input>
@@ -509,6 +682,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="ReportarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoService/ReportarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="MostrarMovimiento">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/MostrarMovimiento" style="document" />
       <wsdl:output>
@@ -523,6 +702,92 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizarPuntajes">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/ActualizarPuntajes" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarReporteJugador">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoService/ActualizarReporteJugador" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IEstadisticasService" type="tns:IEstadisticasService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IEstadisticasService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GuardarEstadisticasPartida">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasService/GuardarEstadisticasPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerarTablaDePuntajes">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasService/GenerarTablaDePuntajes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPuntajesJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPuntaje">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasService/ObtenerPuntaje" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasService/ObtenerJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IRecuperarContraseniaService" type="tns:IRecuperarContraseniaService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IRecuperarContraseniaService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ValidarJugadorPorCorreo">
+      <soap12:operation soapAction="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreoRecuperacion">
+      <soap12:operation soapAction="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarContrasenia">
+      <soap12:operation soapAction="http://tempuri.org/IRecuperarContraseniaService/ActualizarContrasenia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -557,6 +822,24 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IJuegoService" binding="tns:NetTcpBinding_IJuegoService">
+      <soap12:address location="net.tcp://localhost:8060/ServicioMemorama" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8060/ServicioMemorama</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-IAJ58MB2\Aldo</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IEstadisticasService" binding="tns:NetTcpBinding_IEstadisticasService">
+      <soap12:address location="net.tcp://localhost:8060/ServicioMemorama" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8060/ServicioMemorama</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-IAJ58MB2\Aldo</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IRecuperarContraseniaService" binding="tns:NetTcpBinding_IRecuperarContraseniaService">
       <soap12:address location="net.tcp://localhost:8060/ServicioMemorama" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8060/ServicioMemorama</wsa10:Address>

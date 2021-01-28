@@ -1,4 +1,5 @@
 ﻿using Modelo.Modelo;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
@@ -30,29 +31,29 @@ namespace Memorama.Vista
 
         public PrePartida(Jugador jugador, string codigoPartida)
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            InitializeComponent();
+
             partida = new Partida();
             this.jugador = jugador;
             contexto = new InstanceContext(this);
             servidor = new ProxyPartida.PartidaServiceClient(contexto);
-            //contextoJuego = new InstanceContext(this);
-            //servidorJuego = new ProxyJuego.JuegoServiceClient(contextoJuego);
             partida.codigo = codigoPartida;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            InitializeComponent();
+            
 
             jugadoresConectados = new ObservableCollection<Jugador>();
             numerosOrdenCartas = new ObservableCollection<int>();
 
-            if(servidor.ComprobarCodigoPartida(codigoPartida))
+            try
             {
                 servidor.AgregarJugador(jugador);
                 servidor.GenerarOrdenCartas();
-
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("El codigo no corresponde a ninguna partida en curso");
+                MessageBox.Show(ex.ToString());
             }
+           
             jugadoresUnidos.Items.Clear();
             jugadoresUnidos.ItemsSource = jugadoresConectados;
         }
@@ -94,7 +95,6 @@ namespace Memorama.Vista
             {
                 numerosOrdenCartas.Add(n);
             }
-
 
             juego.InicializarOrdenCartas(numerosOrdenCartas);
         }

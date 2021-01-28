@@ -26,6 +26,9 @@ namespace ServicioMemorama
         [OperationContract(IsOneWay = true)]
         void ModificarPuntajes(Jugador jugador, int puntaje);
 
+        [OperationContract (IsOneWay = true)]
+        void ReportarJugador(string jugador);
+
     }
 
     [ServiceContract]
@@ -39,6 +42,9 @@ namespace ServicioMemorama
 
         [OperationContract(IsOneWay = true)]
         void ActualizarPuntajes(ObservableCollection<int> puntajes);
+
+        [OperationContract(IsOneWay = true)]
+        void ActualizarReporteJugador();
 
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="54dcf580-aec3-463f-ba5d-578d0620b5e6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e2028b2d-57fc-4a3c-98b8-799c6b091971" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:9090/?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="ca4a0088-9dfc-46d1-992d-db7519793e81" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd3" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="b1222c10-61c5-4e86-a64f-f561b4ca7f42" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd2" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="89af2271-03b4-4f2c-aea0-72757d5258bc" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd0" />
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="75b47784-49ba-4a0f-a5f9-507ed8760bc7" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd1" />
-    <MetadataFile FileName="ServicioMemorama.wsdl" MetadataType="Wsdl" ID="16f6a680-1abd-40d9-9454-29d500aaa64f" SourceId="1" SourceUrl="http://localhost:9090/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="861bb834-1716-4e49-ad0a-6e343c7e6efe" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd3" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="dcf1b892-7cc5-4d01-bdc2-006dc9443bb2" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd2" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="e7772889-042e-40b7-b29e-7714fb2dc661" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd0" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="532b83a9-1861-4367-a2f5-9bf63d81f622" SourceId="1" SourceUrl="http://localhost:9090/?xsd=xsd1" />
+    <MetadataFile FileName="ServicioMemorama.wsdl" MetadataType="Wsdl" ID="79661f4d-1704-43ad-9656-d23e3da8e3c8" SourceId="1" SourceUrl="http://localhost:9090/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -20,7 +20,7 @@ namespace Memorama.Vista
     /// <summary>
     /// Lógica de interacción para Juego.xaml
     /// </summary>
-    public partial class Juego : ProxyJuego.IJuegoServiceCallback , ProxyEstadisticas.IEstadisticasServiceCallback
+    public partial class Juego : ProxyJuego.IJuegoServiceCallback
     {
         JuegoMemorama juego = new JuegoMemorama();
         Jugador jugador;
@@ -32,13 +32,16 @@ namespace Memorama.Vista
         ProxyEstadisticas.EstadisticasServiceClient servidorEstadisticas;
         Partida partida;
         EstadisticaPartida estadisticaJugador;
+        int statusReporteJugador = 0;
+        string jugadorReportado = "";
+        
 
 
 
         ObservableCollection<int> numeros = new ObservableCollection<int>();
         ObservableCollection<int> puntajesJugadores;
-
-        private ObservableCollection<Jugador> jugadoresJuego;
+        ObservableCollection<Jugador> jugadoresJuego;
+        ObservableCollection<string> jugadoresEnLinea;
 
         public Juego(JuegoMemorama juego, Jugador jugador, Partida partida)
         {
@@ -48,12 +51,14 @@ namespace Memorama.Vista
             contexto = new InstanceContext(this);
             contextoEstadisticas = new InstanceContext(this);
             servidor = new ProxyJuego.JuegoServiceClient(contexto);
-            servidorEstadisticas = new ProxyEstadisticas.EstadisticasServiceClient(contextoEstadisticas);
+            servidorEstadisticas = new ProxyEstadisticas.EstadisticasServiceClient();
+            
 
             this.partida = partida;
 
             jugadoresJuego = new ObservableCollection<Jugador>();
             puntajesJugadores = new ObservableCollection<int>();
+            jugadoresEnLinea = new ObservableCollection<string>();
             estadisticaJugador = new EstadisticaPartida();
             this.jugador = jugador;
             this.juego = juego;
@@ -61,6 +66,11 @@ namespace Memorama.Vista
             TxtNombreJugador.Text = jugador.nickName;
             servidor.ConectarseJuego(jugador);
             servidor.InicializarPuntajes(jugador, 0);
+
+            foreach(Jugador j in jugadoresJuego)
+            {
+                jugadoresEnLinea.Add(j.nickName);
+            }
 
             jugadoresEnJuego.Items.Clear();
             jugadoresEnJuego.ItemsSource = jugadoresJuego;
@@ -186,10 +196,50 @@ namespace Memorama.Vista
             estadisticaJugador.puntaje = paresJugador;
         }
 
-
-        public void MostrarEstadistica()
+        private void botonReportar(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if(jugadorReportado != null)
+            {
+                try
+                {
+                    servidor.ReportarJugador(jugadorReportado);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Tienes que elegir un jugador para reportarlo");
+            }
+        }
+
+        private void Seleccion(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                jugadorReportado = ((Jugador)jugadoresEnJuego.SelectedItem).nickName;
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void ActualizarReporteJugador()
+        {
+            statusReporteJugador++;
+
+            if(statusReporteJugador == 3)
+            {
+                MessageBox.Show("Se te ha reportado hasta en 3 ocasiones, estas fuera de la partida");
+
+                Lobby ventanaLobby = new Lobby(jugadoresJuego, jugador);
+                Window.GetWindow(this).Close();
+                ventanaLobby.Show();
+            }
         }
     }
 }

@@ -23,8 +23,25 @@
             <TextBlock Text="PUNTAJES DE JUGADORES" Margin="300,4 0, 0"></TextBlock>
         </materialDesign:ColorZone>
 
-        <Button Style = "{DynamicResource MaterialDesignRaisedAccentButton}" Content = "REGRESAR" Width = "286" HorizontalAlignment = "Right" Margin = "0,350,41.6,36" Click = "BotonRegresar" Height = "Auto" />
+        <materialDesign:ColorZone Mode="PrimaryLight" Margin="56,81,530.6,0" Height="16">
+            <TextBlock Text="JUGADOR" Margin="40,0,-0.2,0"></TextBlock>
+        </materialDesign:ColorZone>
+
+        <materialDesign:ColorZone Mode="PrimaryDark" Margin="231,81,360.6,0" Height="16">
+            <TextBlock Text="PUNTAJE" Margin="40,0,28.8,0"></TextBlock>
+        </materialDesign:ColorZone>
 
 
+        <ListView Name="listaViewPuntajes" Margin="56,102,360.6,104">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="JUGADOR" DisplayMemberBinding="{Binding jugador}" Width="230"></GridViewColumn>
+                    <GridViewColumn x:Name="PUNTOS" DisplayMemberBinding="{Binding puntaje}" ></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Style = "{DynamicResource MaterialDesignRaisedAccentButton}" Content = "REGRESAR" Width = "286" 
+                HorizontalAlignment = "Right" Margin = "0,350,41.6,36" Click = "BotonRegresar" Height = "Auto" />
     </Grid>
 </Window>

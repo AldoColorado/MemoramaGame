@@ -1,6 +1,7 @@
 ﻿using Modelo.Modelo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ServicioMemorama
 {
-    [ServiceContract(CallbackContract = typeof(IEstadisticasServiceCallback))]
+    [ServiceContract]
     public interface IEstadisticasService
     {
         [OperationContract]
@@ -17,18 +18,14 @@ namespace ServicioMemorama
         [OperationContract]
         bool GenerarTablaDePuntajes();
 
-        [OperationContract(IsOneWay = false)]
-        List<Jugador> ObtenerListaDeJugadores();
-
-        [OperationContract(IsOneWay = false)]
-        List<int> ObtenerPuntajesJugadores();
-
-    }
-
-    [ServiceContract]
-    public interface IEstadisticasServiceCallback
-    {
         [OperationContract]
-        void MostrarEstadistica();
+        ObservableCollection<Tabla> ObtenerPuntajesJugadores();
+
+        [OperationContract]
+        List<int> ObtenerPuntaje();
+
+        [OperationContract]
+        List<string> ObtenerJugadores();
+
     }
 }

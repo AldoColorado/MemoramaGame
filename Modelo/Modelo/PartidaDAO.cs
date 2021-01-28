@@ -33,7 +33,6 @@ namespace Modelo.Modelo
 
             try
             {
-
                 Partida buscar = db.Partida.Where(q => q.codigo.Equals(codigo)).FirstOrDefault();
                 if(buscar != null)
                 {
@@ -69,7 +68,7 @@ namespace Modelo.Modelo
 
         public override List<Partida> Obtener()
         {
-            throw new NotImplementedException();
+            return db.Partida.ToList<Partida>();
         }
 
         public override Partida ObtenerEntidad(string pk)

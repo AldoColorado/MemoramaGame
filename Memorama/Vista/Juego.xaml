@@ -43,7 +43,7 @@
             <TextBlock Text="JUGADORES" Margin="70,10,9.8,0.2"></TextBlock>
         </materialDesign:ColorZone>
 
-        <ListView Name="jugadoresEnJuego" Margin="1170,198,47.6,314.2">
+        <ListView Name="jugadoresEnJuego" Margin="1170,198,47.6,314.2" SelectionChanged="Seleccion">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding nickName}"></GridViewColumn>
@@ -63,7 +63,10 @@
             <TextBlock Name="TxtNombreJugador" Margin="36,0,0,-0.2" ></TextBlock>
         </materialDesign:ColorZone>
 
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="SALIR" Width="118" HorizontalAlignment="Right" Margin="0,680,47.6,67.2" Click="botonSalir" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="SALIR" Width="118" 
+                HorizontalAlignment="Right" Margin="0,680,47.6,67.2" Click="botonSalir" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="REPORTAR JUGADOR" Width="151" 
+                HorizontalAlignment="Right" Margin="0,536,14.6,214.2" Click="botonReportar" Height="Auto"/>
 
     </Grid>
 </Window>

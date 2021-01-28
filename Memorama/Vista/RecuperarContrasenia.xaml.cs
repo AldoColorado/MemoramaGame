@@ -36,19 +36,27 @@ namespace Memorama
             ProxyRecuperarContrasenia.RecuperarContraseniaServiceClient servidor = new ProxyRecuperarContrasenia.RecuperarContraseniaServiceClient();
             jugadorEncontrado = (bool)(servidor?.ValidarJugadorPorCorreo(TextoCorreo.Text));
 
-            if (jugadorEncontrado)
+            try
             {
-                GenerarCodigoRecuperacion();
-                servidor?.EnviarCorreoRecuperacion(TextoCorreo.Text, codigo);
+                if(jugadorEncontrado)
+                {
+                    GenerarCodigoRecuperacion();
+                    servidor?.EnviarCorreoRecuperacion(TextoCorreo.Text, codigo);
 
-                RecuperarContraseniaCodigo ventanaRecuperarContraseniaCodigo = new RecuperarContraseniaCodigo(codigo, TextoCorreo.Text);
-                ventanaRecuperarContraseniaCodigo.Show();
-                Window.GetWindow(this).Close();
+                    RecuperarContraseniaCodigo ventanaRecuperarContraseniaCodigo = new RecuperarContraseniaCodigo(codigo, TextoCorreo.Text);
+                    ventanaRecuperarContraseniaCodigo.Show();
+                    Window.GetWindow(this).Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró ningún jugador con ese correo");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("No se encontró ningún jugador con ese correo");
+                MessageBox.Show("ERROR: El servidor no esta disponible, intente más tarde");
             }
+           
         }
 
         public void GenerarCodigoRecuperacion()

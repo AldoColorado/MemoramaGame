@@ -62,6 +62,7 @@ namespace PruebasUnitarias
         [TestMethod]
         public void PruebaObtenerJugadores()
         {
+            InicializarDatos();
             List<Jugador> jugadores = new List<Jugador>();
 
             jugadores = jugadorDAO.Obtener();

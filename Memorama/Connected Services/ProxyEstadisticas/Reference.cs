@@ -213,6 +213,12 @@ namespace Memorama.ProxyEstadisticas {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartidaService/GenerarCodigo", ReplyAction="http://tempuri.org/IPartidaService/GenerarCodigoResponse")]
         System.Threading.Tasks.Task<string> GenerarCodigoAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartidaService/CrearEstadisticaPartida", ReplyAction="http://tempuri.org/IPartidaService/CrearEstadisticaPartidaResponse")]
+        bool CrearEstadisticaPartida(Modelo.Modelo.Partida partida, Modelo.Modelo.Jugador jugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartidaService/CrearEstadisticaPartida", ReplyAction="http://tempuri.org/IPartidaService/CrearEstadisticaPartidaResponse")]
+        System.Threading.Tasks.Task<bool> CrearEstadisticaPartidaAsync(Modelo.Modelo.Partida partida, Modelo.Modelo.Jugador jugador);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartidaService/AgregarJugador")]
         void AgregarJugador(Modelo.Modelo.Jugador jugador);
         
@@ -296,6 +302,14 @@ namespace Memorama.ProxyEstadisticas {
         
         public System.Threading.Tasks.Task<string> GenerarCodigoAsync() {
             return base.Channel.GenerarCodigoAsync();
+        }
+        
+        public bool CrearEstadisticaPartida(Modelo.Modelo.Partida partida, Modelo.Modelo.Jugador jugador) {
+            return base.Channel.CrearEstadisticaPartida(partida, jugador);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CrearEstadisticaPartidaAsync(Modelo.Modelo.Partida partida, Modelo.Modelo.Jugador jugador) {
+            return base.Channel.CrearEstadisticaPartidaAsync(partida, jugador);
         }
         
         public void AgregarJugador(Modelo.Modelo.Jugador jugador) {
@@ -443,7 +457,7 @@ namespace Memorama.ProxyEstadisticas {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProxyEstadisticas.IEstadisticasService", CallbackContract=typeof(Memorama.ProxyEstadisticas.IEstadisticasServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProxyEstadisticas.IEstadisticasService")]
     public interface IEstadisticasService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/GuardarEstadisticasPartida", ReplyAction="http://tempuri.org/IEstadisticasService/GuardarEstadisticasPartidaResponse")]
@@ -458,24 +472,23 @@ namespace Memorama.ProxyEstadisticas {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/GenerarTablaDePuntajes", ReplyAction="http://tempuri.org/IEstadisticasService/GenerarTablaDePuntajesResponse")]
         System.Threading.Tasks.Task<bool> GenerarTablaDePuntajesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerListaDeJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerListaDeJugadoresResponse")]
-        Modelo.Modelo.Jugador[] ObtenerListaDeJugadores();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerListaDeJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerListaDeJugadoresResponse")]
-        System.Threading.Tasks.Task<Modelo.Modelo.Jugador[]> ObtenerListaDeJugadoresAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadoresResponse")]
+        Modelo.Modelo.Tabla[] ObtenerPuntajesJugadores();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadoresResponse")]
-        int[] ObtenerPuntajesJugadores();
+        System.Threading.Tasks.Task<Modelo.Modelo.Tabla[]> ObtenerPuntajesJugadoresAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerPuntajesJugadoresResponse")]
-        System.Threading.Tasks.Task<int[]> ObtenerPuntajesJugadoresAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IEstadisticasServiceCallback {
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerPuntaje", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerPuntajeResponse")]
+        int[] ObtenerPuntaje();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/MostrarEstadistica", ReplyAction="http://tempuri.org/IEstadisticasService/MostrarEstadisticaResponse")]
-        void MostrarEstadistica();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerPuntaje", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerPuntajeResponse")]
+        System.Threading.Tasks.Task<int[]> ObtenerPuntajeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerJugadoresResponse")]
+        string[] ObtenerJugadores();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasService/ObtenerJugadores", ReplyAction="http://tempuri.org/IEstadisticasService/ObtenerJugadoresResponse")]
+        System.Threading.Tasks.Task<string[]> ObtenerJugadoresAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -484,26 +497,25 @@ namespace Memorama.ProxyEstadisticas {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EstadisticasServiceClient : System.ServiceModel.DuplexClientBase<Memorama.ProxyEstadisticas.IEstadisticasService>, Memorama.ProxyEstadisticas.IEstadisticasService {
+    public partial class EstadisticasServiceClient : System.ServiceModel.ClientBase<Memorama.ProxyEstadisticas.IEstadisticasService>, Memorama.ProxyEstadisticas.IEstadisticasService {
         
-        public EstadisticasServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public EstadisticasServiceClient() {
         }
         
-        public EstadisticasServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public EstadisticasServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public EstadisticasServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public EstadisticasServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public EstadisticasServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public EstadisticasServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public EstadisticasServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public EstadisticasServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
         public bool GuardarEstadisticasPartida(Modelo.Modelo.EstadisticaPartida estadisticaPartida, Modelo.Modelo.Jugador jugador, Modelo.Modelo.Partida partida) {
@@ -522,20 +534,103 @@ namespace Memorama.ProxyEstadisticas {
             return base.Channel.GenerarTablaDePuntajesAsync();
         }
         
-        public Modelo.Modelo.Jugador[] ObtenerListaDeJugadores() {
-            return base.Channel.ObtenerListaDeJugadores();
-        }
-        
-        public System.Threading.Tasks.Task<Modelo.Modelo.Jugador[]> ObtenerListaDeJugadoresAsync() {
-            return base.Channel.ObtenerListaDeJugadoresAsync();
-        }
-        
-        public int[] ObtenerPuntajesJugadores() {
+        public Modelo.Modelo.Tabla[] ObtenerPuntajesJugadores() {
             return base.Channel.ObtenerPuntajesJugadores();
         }
         
-        public System.Threading.Tasks.Task<int[]> ObtenerPuntajesJugadoresAsync() {
+        public System.Threading.Tasks.Task<Modelo.Modelo.Tabla[]> ObtenerPuntajesJugadoresAsync() {
             return base.Channel.ObtenerPuntajesJugadoresAsync();
+        }
+        
+        public int[] ObtenerPuntaje() {
+            return base.Channel.ObtenerPuntaje();
+        }
+        
+        public System.Threading.Tasks.Task<int[]> ObtenerPuntajeAsync() {
+            return base.Channel.ObtenerPuntajeAsync();
+        }
+        
+        public string[] ObtenerJugadores() {
+            return base.Channel.ObtenerJugadores();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ObtenerJugadoresAsync() {
+            return base.Channel.ObtenerJugadoresAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProxyEstadisticas.IRecuperarContraseniaService")]
+    public interface IRecuperarContraseniaService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreo", ReplyAction="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreoResponse")]
+        bool ValidarJugadorPorCorreo(string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreo", ReplyAction="http://tempuri.org/IRecuperarContraseniaService/ValidarJugadorPorCorreoResponse")]
+        System.Threading.Tasks.Task<bool> ValidarJugadorPorCorreoAsync(string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacion", ReplyAction="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacionResponse")]
+        bool EnviarCorreoRecuperacion(string correo, string codigoRecuperacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacion", ReplyAction="http://tempuri.org/IRecuperarContraseniaService/EnviarCorreoRecuperacionResponse")]
+        System.Threading.Tasks.Task<bool> EnviarCorreoRecuperacionAsync(string correo, string codigoRecuperacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecuperarContraseniaService/ActualizarContrasenia", ReplyAction="http://tempuri.org/IRecuperarContraseniaService/ActualizarContraseniaResponse")]
+        bool ActualizarContrasenia(string contrasenia, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecuperarContraseniaService/ActualizarContrasenia", ReplyAction="http://tempuri.org/IRecuperarContraseniaService/ActualizarContraseniaResponse")]
+        System.Threading.Tasks.Task<bool> ActualizarContraseniaAsync(string contrasenia, string correo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IRecuperarContraseniaServiceChannel : Memorama.ProxyEstadisticas.IRecuperarContraseniaService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RecuperarContraseniaServiceClient : System.ServiceModel.ClientBase<Memorama.ProxyEstadisticas.IRecuperarContraseniaService>, Memorama.ProxyEstadisticas.IRecuperarContraseniaService {
+        
+        public RecuperarContraseniaServiceClient() {
+        }
+        
+        public RecuperarContraseniaServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public RecuperarContraseniaServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public RecuperarContraseniaServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public RecuperarContraseniaServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool ValidarJugadorPorCorreo(string correo) {
+            return base.Channel.ValidarJugadorPorCorreo(correo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ValidarJugadorPorCorreoAsync(string correo) {
+            return base.Channel.ValidarJugadorPorCorreoAsync(correo);
+        }
+        
+        public bool EnviarCorreoRecuperacion(string correo, string codigoRecuperacion) {
+            return base.Channel.EnviarCorreoRecuperacion(correo, codigoRecuperacion);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EnviarCorreoRecuperacionAsync(string correo, string codigoRecuperacion) {
+            return base.Channel.EnviarCorreoRecuperacionAsync(correo, codigoRecuperacion);
+        }
+        
+        public bool ActualizarContrasenia(string contrasenia, string correo) {
+            return base.Channel.ActualizarContrasenia(contrasenia, correo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ActualizarContraseniaAsync(string contrasenia, string correo) {
+            return base.Channel.ActualizarContraseniaAsync(contrasenia, correo);
         }
     }
 }

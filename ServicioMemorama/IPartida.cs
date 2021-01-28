@@ -19,6 +19,9 @@ namespace ServicioMemorama
         [OperationContract]
         string GenerarCodigo();
 
+        [OperationContract]
+        bool CrearEstadisticaPartida(Partida partida, Jugador jugador);
+
         [OperationContract(IsOneWay = true)]
         void AgregarJugador(Jugador jugador);
 

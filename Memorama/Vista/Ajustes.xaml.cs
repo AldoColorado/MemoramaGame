@@ -27,13 +27,13 @@ namespace Memorama
 
         private void BotonAplicar(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location); 
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
 
         private void ComboBoxLenguajeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ComboBoxLenguaje.SelectedIndex == 0)
+            if(ComboBoxLenguaje.SelectedIndex == 0)
             {
                 Properties.Settings.Default.lenguaje = "es-MX";
             }

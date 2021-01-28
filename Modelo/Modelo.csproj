@@ -96,6 +96,7 @@
       <DependentUpon>Memorama.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\PartidaDAO.cs" />
+    <Compile Include="Modelo\Tabla.cs" />
     <Compile Include="Modelo\Tarjeta.cs">
       <DependentUpon>Memorama.tt</DependentUpon>
     </Compile>
