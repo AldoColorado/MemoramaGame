@@ -57,6 +57,7 @@ namespace Memorama
             string contraseniaEncriptada = string.Empty;
             byte[] encryted = System.Text.Encoding.Unicode.GetBytes(TextoPassword.Password);
             contraseniaEncriptada = Convert.ToBase64String(encryted);
+            string contrasenia = TextoPassword.Password;
             
             jugador.nickName = TextoNickName.Text;
             jugador.nombre = TextoNombre.Text;
@@ -66,7 +67,7 @@ namespace Memorama
             bool nicknameValido = ValidarCampo(TextoNickName.Text);
             bool nombreValido = ValidarCampo(TextoNombre.Text);
             bool correoValido = ValidarCampo(TextoCorreo.Text);
-            bool contraseniaValida = ValidarCampo(TextoPassword.Password);
+            bool contraseniaValida = ValidarCampo(contrasenia);
 
             GenerarCodigoRegistro();
 
@@ -162,21 +163,23 @@ namespace Memorama
     
         public bool ValidarCampo(string campo)
         {
-            if (campo != null)
+            bool esValido = false;
+            if (campo != "")
             {
                 for (int i = 0; i < campo.Length; i++)
                 {
                     if (campo.Substring(i,1) == " ")
                     {
-                        return false;
+                        return esValido;
                     }
                 }
+                esValido = true;
             }
             else
             {
-                return false;
+               esValido = false;
             }
-            return true;
+            return esValido;
         }
     }
 }
