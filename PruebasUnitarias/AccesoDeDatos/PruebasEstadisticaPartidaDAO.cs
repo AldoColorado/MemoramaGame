@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace PruebasUnitarias.AccesoDeDatos
 {
+    /// <summary>
+    /// Clase que prueba EstadisticaPartidaDAO
+    /// </summary>
     [TestClass]
     public class PruebasEstadisticaPartidaDAO
     {
@@ -17,6 +20,9 @@ namespace PruebasUnitarias.AccesoDeDatos
         EstadisticaPartida estadisticaPartida;
         EstadisticaPartidaDAO estadisticaPartidaDAO;
 
+        /// <summary>
+        /// Método que inicializa los datos que se utilizarán en las pruebas
+        /// </summary>
         public void InicializarDatos()
         {
             jugador = new Jugador();
@@ -30,6 +36,9 @@ namespace PruebasUnitarias.AccesoDeDatos
             estadisticaPartida.puntaje = 5;
         }
 
+        /// <summary>
+        /// Método que prueba si las estadísticas de partida puede ser creada
+        /// </summary>
         [TestMethod]
         public void PruebaCrearEstadisticaPartida()
         {
@@ -39,6 +48,9 @@ namespace PruebasUnitarias.AccesoDeDatos
             Assert.IsTrue(creada);
         }
 
+        /// <summary>
+        /// Método que prueba si las estadísticas de una partida puede ser modificada
+        /// </summary>
         [TestMethod]
         public void PruebaModificarEstadisticaPartida()
         {
@@ -48,6 +60,9 @@ namespace PruebasUnitarias.AccesoDeDatos
             
         }
 
+        /// <summary>
+        /// Método que prueba si se pueden obtener las estadísticas de una partida
+        /// </summary>
         [TestMethod]
         public void PruebaObtenerEstadisticasPartidas()
         {

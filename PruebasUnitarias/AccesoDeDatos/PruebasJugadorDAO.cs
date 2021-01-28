@@ -9,12 +9,18 @@ using System.Linq;
 
 namespace PruebasUnitarias
 {
+    /// <summary>
+    /// Clase que prueba JugadorDAO
+    /// </summary>
     [TestClass]
     public class PruebaJugadorBaseDeDatos
     {
         Jugador jugador;
         JugadorDAO jugadorDAO;
 
+        /// <summary>
+        /// Método que inicializa los datos que se utilizarán en estas pruebas
+        /// </summary>
         public void InicializarDatos()
         {
             jugador = new Jugador();
@@ -32,6 +38,9 @@ namespace PruebasUnitarias
             jugador.contrasenia = contraseniaEncriptada;
         }
 
+        /// <summary>
+        /// Método que prueba si un jugador puede ser creado
+        /// </summary>
         [TestMethod]
         public void PruebaCrearJugador()
         {
@@ -41,6 +50,9 @@ namespace PruebasUnitarias
             Assert.IsTrue(resultado);
         }
 
+        /// <summary>
+        /// Método que prueba si se validan los datos del login (Usuario y Contraseña)
+        /// </summary>
         [TestMethod]
         public void PruebaValidarUsuario()
         {
@@ -50,6 +62,9 @@ namespace PruebasUnitarias
             Assert.IsTrue(resultado);
         }
 
+        /// <summary>
+        /// Método que prueba si un jugador puede ser eliminado
+        /// </summary>
         [TestMethod]
         public void PruebaEliminarJugador()
         {
@@ -59,6 +74,9 @@ namespace PruebasUnitarias
             Assert.IsTrue(resultado);
         }
 
+        /// <summary>
+        /// Método que prueba si se puede obtener los jugadores guardados en la base de datos
+        /// </summary>
         [TestMethod]
         public void PruebaObtenerJugadores()
         {
@@ -69,6 +87,9 @@ namespace PruebasUnitarias
             Assert.IsNotNull(jugadores);
         }
 
+        /// <summary>
+        /// Método que prueba si se puede recuperar un jugador de la base de datos
+        /// </summary>
         [TestMethod]
         public void PruebaObtenerEntidad()
         {

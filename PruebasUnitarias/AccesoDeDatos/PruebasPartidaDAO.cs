@@ -6,12 +6,18 @@ using System.Collections.Generic;
 
 namespace PruebasUnitarias.AccesoDeDatos
 {
+    /// <summary>
+    /// Clase que prueba PartidaDAO
+    /// </summary>
     [TestClass]
     public class PruebasPartidaDAO
     {
         Partida partida;
         PartidaDAO partidaDAO;
 
+        /// <summary>
+        /// Método que inicializa los datos que se utilizarán en las pruebas
+        /// </summary>
         public void InicializarDatos()
         {
             partida = new Partida();
@@ -21,6 +27,10 @@ namespace PruebasUnitarias.AccesoDeDatos
             partida.codigo = "12345";
 
         }
+        
+        /// <summary>
+        /// Método que prueba si una partida puede ser creada
+        /// </summary>
         [TestMethod]
         public void PruebaCrearPartida()
         {
@@ -30,6 +40,9 @@ namespace PruebasUnitarias.AccesoDeDatos
             Assert.IsTrue(resultado);
         }
 
+        /// <summary>
+        /// Método que prueba si se puede buscar partida en la base de datos
+        /// </summary>
         [TestMethod]
         public void PruebaBuscarPartida()
         {
@@ -39,6 +52,9 @@ namespace PruebasUnitarias.AccesoDeDatos
             Assert.IsTrue(resultado);
         }
 
+        /// <summary>
+        /// Método que prueba si se pueden obtener todas las partidas de la base de datos
+        /// </summary>
         [TestMethod]
         public void PruebaObtenerPartidas()
         {
@@ -50,6 +66,9 @@ namespace PruebasUnitarias.AccesoDeDatos
             Assert.IsNotNull(partida);
         }
 
+        /// <summary>
+        /// Método que prueba si se puede obtener una partida de la base de datos
+        /// </summary>
         [TestMethod]
         public void PruebaObtenerPartida()
         {
