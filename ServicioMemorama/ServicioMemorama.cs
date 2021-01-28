@@ -68,7 +68,7 @@ namespace ServicioMemorama
                     }
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -118,9 +118,15 @@ namespace ServicioMemorama
         public bool CrearJugador(Jugador jugador)
         {
             bool creado = false;
-
+            bool jugadorExistente = false;
             JugadorDAO jugadorDAO = new JugadorDAO();
-            creado = jugadorDAO.Crear(jugador);
+
+            jugadorExistente = jugadorDAO.ValidarJugadorPorCorreo(jugador.correoElectronico);
+
+            if(!jugadorExistente)
+            {
+                creado = jugadorDAO.Crear(jugador);
+            }
 
             if(creado)
             {
@@ -352,7 +358,7 @@ namespace ServicioMemorama
             {
                 creada = partidaDAO.Crear(partida);    
             }
-            catch(Exception ex)
+            catch(NullReferenceException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -471,11 +477,35 @@ namespace ServicioMemorama
                     Console.WriteLine($"{jugador.nickName} se ha conectado");
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
 
+        }
+
+        public void DeconectarseDeJuego(Jugador jugadorADeconectar)
+        {
+            try
+            {
+                foreach(Jugador jugador in clientesEnJuego.Keys)
+                {
+                    if(jugadorADeconectar.nickName == jugador.nickName)
+                    {
+                        this.clientesEnJuego.Remove(jugador);
+                        this.jugadoresEnJuego.Remove(jugador);
+                        foreach(var c in clientesEnJuego)
+                        {
+                            c.Value.JugadoresEnJuego(jugadoresEnJuego);
+                        }
+                    }
+                }
+            }
+            catch(CommunicationException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
         }
 
         public void InicializarPuntajes(Jugador jugador, int puntaje)
@@ -495,7 +525,7 @@ namespace ServicioMemorama
                     }
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -547,7 +577,7 @@ namespace ServicioMemorama
                 }
 
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -569,13 +599,13 @@ namespace ServicioMemorama
                     }
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
 
-        public void ReportarJugador(string jugador)
+        public void ReportarJugador(string jugador, Jugador jugadorQueReporta)
         {
             callBackActualJuego = OperationContext.Current.GetCallbackChannel<IJuegoServiceCallback>();
 
@@ -587,12 +617,12 @@ namespace ServicioMemorama
                     {
                         if(c.Key.nickName == jugador)
                         {
-                            c.Value.ActualizarReporteJugador();
+                            c.Value.ActualizarReporteJugador(jugadorQueReporta);
                         }
                     }
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -627,7 +657,7 @@ namespace ServicioMemorama
 
                 estadisticaDAO.Modificar(estadisticaPartida);
             }
-            catch(Exception ex)
+            catch(NullReferenceException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -669,7 +699,7 @@ namespace ServicioMemorama
                 }     
                 generada = true;
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 Console.WriteLine(ex.ToString());
             }

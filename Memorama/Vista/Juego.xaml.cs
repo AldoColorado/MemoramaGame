@@ -39,6 +39,7 @@ namespace Memorama.Vista
         ObservableCollection<int> puntajesJugadores;
         ObservableCollection<Jugador> jugadoresJuego;
         ObservableCollection<string> jugadoresEnLinea;
+        ObservableCollection<string> jugadoresQueReportan;
 
         /// <summary>
         /// Constructor de la clase
@@ -62,6 +63,8 @@ namespace Memorama.Vista
             puntajesJugadores = new ObservableCollection<int>();
             jugadoresEnLinea = new ObservableCollection<string>();
             estadisticaJugador = new EstadisticaPartida();
+            jugadoresQueReportan = new ObservableCollection<string>();
+
             this.jugador = jugador;
             this.juego = juego;
 
@@ -199,7 +202,6 @@ namespace Memorama.Vista
                 Lobby ventanaLobby = new Lobby(jugadores , jugador);
                 Window.GetWindow(this).Close();
                 ventanaLobby.Show();
-
             }
             catch(Exception ex)
             {
@@ -250,7 +252,7 @@ namespace Memorama.Vista
             {
                 try
                 {
-                    servidor.ReportarJugador(jugadorReportado);
+                    servidor.ReportarJugador(jugadorReportado, jugador);
                 }
                 catch(Exception ex)
                 {
@@ -272,30 +274,79 @@ namespace Memorama.Vista
         {
             try
             {
-                jugadorReportado = ((Jugador)jugadoresEnJuego.SelectedItem).nickName;
-                
+                jugadorReportado = ((Jugador)jugadoresEnJuego.SelectedItem).nickName;   
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                
             }
         }
 
         /// <summary>
         /// Metodo para actualizar el reporte del jugador
         /// </summary>
-        public void ActualizarReporteJugador()
+        public void ActualizarReporteJugador(Jugador jugadorQueReporta)
         {
-            statusReporteJugador++;
+            bool jugadorYaReporto = false;
 
-            if(statusReporteJugador == 3)
+            foreach(var jugador in jugadoresQueReportan)
             {
-                MessageBox.Show("Se te ha reportado hasta en 3 ocasiones, estas fuera de la partida");
-
-                Lobby ventanaLobby = new Lobby(jugadoresJuego, jugador);
-                Window.GetWindow(this).Close();
-                ventanaLobby.Show();
+                if(jugadorQueReporta.nickName.Equals(jugador))
+                {
+                    jugadorYaReporto = true;
+                }
             }
+
+            if(!jugadorYaReporto)
+            {
+                jugadoresQueReportan.Add(jugadorQueReporta.nickName);
+
+                int numeroDeJugadores = 0;
+                statusReporteJugador++;
+
+                foreach(var jugadores in jugadoresJuego)
+                {
+                    numeroDeJugadores++;
+                }
+
+                switch(numeroDeJugadores)
+                {
+
+                    case 2:
+                        if(statusReporteJugador == 1)
+                        {
+                            ExpulsarJugador();
+                        }
+                        break;
+
+                    case 3:
+                        if(statusReporteJugador == 2)
+                        {
+                            ExpulsarJugador();
+                        }
+                        break;
+
+                    case 4:
+                        if(statusReporteJugador == 3)
+                        {
+                            ExpulsarJugador();
+                        }
+                        break;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Metodo para sacar a un jugador de la partida en caso de que sea reportado
+        /// </summary>
+        public void ExpulsarJugador()
+        {
+            MessageBox.Show("Se te ha reportado por todos los jugadores en la partida, estas fuera de la partida");
+
+            Lobby ventanaLobby = new Lobby(jugadoresJuego, jugador);
+            Window.GetWindow(this).Close();
+            ventanaLobby.Show();
         }
     }
 }

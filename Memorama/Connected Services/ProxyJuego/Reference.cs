@@ -129,17 +129,17 @@ namespace Memorama.ProxyJuego {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProxyJuego.IRegistroService", CallbackContract=typeof(Memorama.ProxyJuego.IRegistroServiceCallback))]
     public interface IRegistroService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegistroService/CrearJugador")]
-        void CrearJugador(Modelo.Modelo.Jugador jugador);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroService/CrearJugador", ReplyAction="http://tempuri.org/IRegistroService/CrearJugadorResponse")]
+        bool CrearJugador(Modelo.Modelo.Jugador jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegistroService/CrearJugador")]
-        System.Threading.Tasks.Task CrearJugadorAsync(Modelo.Modelo.Jugador jugador);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroService/CrearJugador", ReplyAction="http://tempuri.org/IRegistroService/CrearJugadorResponse")]
+        System.Threading.Tasks.Task<bool> CrearJugadorAsync(Modelo.Modelo.Jugador jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegistroService/EnviarCorreoRegistro")]
-        void EnviarCorreoRegistro(string correo, string codigoDeRegistro);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroService/EnviarCorreoRegistro", ReplyAction="http://tempuri.org/IRegistroService/EnviarCorreoRegistroResponse")]
+        bool EnviarCorreoRegistro(string correo, string codigoDeRegistro);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegistroService/EnviarCorreoRegistro")]
-        System.Threading.Tasks.Task EnviarCorreoRegistroAsync(string correo, string codigoDeRegistro);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistroService/EnviarCorreoRegistro", ReplyAction="http://tempuri.org/IRegistroService/EnviarCorreoRegistroResponse")]
+        System.Threading.Tasks.Task<bool> EnviarCorreoRegistroAsync(string correo, string codigoDeRegistro);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -147,9 +147,6 @@ namespace Memorama.ProxyJuego {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegistroService/VerificarCreacionJugador")]
         void VerificarCreacionJugador(bool creado);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRegistroService/VerificarEnvioDeCorreo")]
-        void VerificarEnvioDeCorreo(bool enviado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -180,19 +177,19 @@ namespace Memorama.ProxyJuego {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void CrearJugador(Modelo.Modelo.Jugador jugador) {
-            base.Channel.CrearJugador(jugador);
+        public bool CrearJugador(Modelo.Modelo.Jugador jugador) {
+            return base.Channel.CrearJugador(jugador);
         }
         
-        public System.Threading.Tasks.Task CrearJugadorAsync(Modelo.Modelo.Jugador jugador) {
+        public System.Threading.Tasks.Task<bool> CrearJugadorAsync(Modelo.Modelo.Jugador jugador) {
             return base.Channel.CrearJugadorAsync(jugador);
         }
         
-        public void EnviarCorreoRegistro(string correo, string codigoDeRegistro) {
-            base.Channel.EnviarCorreoRegistro(correo, codigoDeRegistro);
+        public bool EnviarCorreoRegistro(string correo, string codigoDeRegistro) {
+            return base.Channel.EnviarCorreoRegistro(correo, codigoDeRegistro);
         }
         
-        public System.Threading.Tasks.Task EnviarCorreoRegistroAsync(string correo, string codigoDeRegistro) {
+        public System.Threading.Tasks.Task<bool> EnviarCorreoRegistroAsync(string correo, string codigoDeRegistro) {
             return base.Channel.EnviarCorreoRegistroAsync(correo, codigoDeRegistro);
         }
     }
@@ -382,10 +379,16 @@ namespace Memorama.ProxyJuego {
         System.Threading.Tasks.Task ModificarPuntajesAsync(Modelo.Modelo.Jugador jugador, int puntaje);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoService/ReportarJugador")]
-        void ReportarJugador(string jugador);
+        void ReportarJugador(string jugador, Modelo.Modelo.Jugador jugadorQueReporta);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoService/ReportarJugador")]
-        System.Threading.Tasks.Task ReportarJugadorAsync(string jugador);
+        System.Threading.Tasks.Task ReportarJugadorAsync(string jugador, Modelo.Modelo.Jugador jugadorQueReporta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/DeconectarseDeJuego", ReplyAction="http://tempuri.org/IJuegoService/DeconectarseDeJuegoResponse")]
+        void DeconectarseDeJuego(Modelo.Modelo.Jugador jugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/DeconectarseDeJuego", ReplyAction="http://tempuri.org/IJuegoService/DeconectarseDeJuegoResponse")]
+        System.Threading.Tasks.Task DeconectarseDeJuegoAsync(Modelo.Modelo.Jugador jugador);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -401,7 +404,7 @@ namespace Memorama.ProxyJuego {
         void ActualizarPuntajes(int[] puntajes);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJuegoService/ActualizarReporteJugador")]
-        void ActualizarReporteJugador();
+        void ActualizarReporteJugador(Modelo.Modelo.Jugador jugadorQueReporta);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -464,12 +467,20 @@ namespace Memorama.ProxyJuego {
             return base.Channel.ModificarPuntajesAsync(jugador, puntaje);
         }
         
-        public void ReportarJugador(string jugador) {
-            base.Channel.ReportarJugador(jugador);
+        public void ReportarJugador(string jugador, Modelo.Modelo.Jugador jugadorQueReporta) {
+            base.Channel.ReportarJugador(jugador, jugadorQueReporta);
         }
         
-        public System.Threading.Tasks.Task ReportarJugadorAsync(string jugador) {
-            return base.Channel.ReportarJugadorAsync(jugador);
+        public System.Threading.Tasks.Task ReportarJugadorAsync(string jugador, Modelo.Modelo.Jugador jugadorQueReporta) {
+            return base.Channel.ReportarJugadorAsync(jugador, jugadorQueReporta);
+        }
+        
+        public void DeconectarseDeJuego(Modelo.Modelo.Jugador jugador) {
+            base.Channel.DeconectarseDeJuego(jugador);
+        }
+        
+        public System.Threading.Tasks.Task DeconectarseDeJuegoAsync(Modelo.Modelo.Jugador jugador) {
+            return base.Channel.DeconectarseDeJuegoAsync(jugador);
         }
     }
     

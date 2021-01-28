@@ -52,7 +52,10 @@ namespace ServicioMemorama
         /// </summary>
         /// <param name="jugador">Jugador a reportar</param>
         [OperationContract (IsOneWay = true)]
-        void ReportarJugador(string jugador);
+        void ReportarJugador(string jugador, Jugador jugadorQueReporta);
+
+        [OperationContract]
+        void DeconectarseDeJuego(Jugador jugador);
 
     }
 
@@ -88,7 +91,7 @@ namespace ServicioMemorama
         /// Metodo para actualizar el reporte a un jugador
         /// </summary>
         [OperationContract(IsOneWay = true)]
-        void ActualizarReporteJugador();
+        void ActualizarReporteJugador(Jugador jugadorQueReporta);
 
     }
 }

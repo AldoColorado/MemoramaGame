@@ -83,6 +83,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CrearJugadorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CrearJugadorResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="EnviarCorreoRegistro">
     <xs:complexType>
       <xs:sequence>
@@ -91,17 +98,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EnviarCorreoRegistroResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EnviarCorreoRegistroResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="VerificarCreacionJugador">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="creado" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="VerificarEnvioDeCorreo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="enviado" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -243,7 +250,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="jugador" nillable="true" type="xs:string" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugadorQueReporta" nillable="true" type="q17:Jugador" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeconectarseDeJuego">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugador" nillable="true" type="q18:Jugador" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeconectarseDeJuegoResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="MostrarMovimiento">
@@ -257,28 +277,30 @@
   <xs:element name="JugadoresEnJuego">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugadores" nillable="true" type="q17:ArrayOfJugador" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugadores" nillable="true" type="q19:ArrayOfJugador" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ActualizarPuntajes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="puntajes" nillable="true" type="q18:ArrayOfint" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="puntajes" nillable="true" type="q20:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ActualizarReporteJugador">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugadorQueReporta" nillable="true" type="q21:Jugador" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GuardarEstadisticasPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="estadisticaPartida" nillable="true" type="q19:EstadisticaPartida" />
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugador" nillable="true" type="q20:Jugador" />
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="partida" nillable="true" type="q21:Partida" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="estadisticaPartida" nillable="true" type="q22:EstadisticaPartida" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="jugador" nillable="true" type="q23:Jugador" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="partida" nillable="true" type="q24:Partida" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -309,7 +331,7 @@
   <xs:element name="ObtenerPuntajesJugadoresResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="ObtenerPuntajesJugadoresResult" nillable="true" type="q22:ArrayOfTabla" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Modelo.Modelo" minOccurs="0" name="ObtenerPuntajesJugadoresResult" nillable="true" type="q25:ArrayOfTabla" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -321,7 +343,7 @@
   <xs:element name="ObtenerPuntajeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerPuntajeResult" nillable="true" type="q23:ArrayOfint" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerPuntajeResult" nillable="true" type="q26:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -333,7 +355,7 @@
   <xs:element name="ObtenerJugadoresResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerJugadoresResult" nillable="true" type="q24:ArrayOfstring" />
+        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerJugadoresResult" nillable="true" type="q27:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

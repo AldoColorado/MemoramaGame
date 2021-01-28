@@ -218,14 +218,17 @@
   <wsdl:message name="IRegistroService_CrearJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearJugador" />
   </wsdl:message>
+  <wsdl:message name="IRegistroService_CrearJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearJugadorResponse" />
+  </wsdl:message>
   <wsdl:message name="IRegistroService_EnviarCorreoRegistro_InputMessage">
     <wsdl:part name="parameters" element="tns:EnviarCorreoRegistro" />
   </wsdl:message>
+  <wsdl:message name="IRegistroService_EnviarCorreoRegistro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoRegistroResponse" />
+  </wsdl:message>
   <wsdl:message name="IRegistroService_VerificarCreacionJugador_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:VerificarCreacionJugador" />
-  </wsdl:message>
-  <wsdl:message name="IRegistroService_VerificarEnvioDeCorreo_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:VerificarEnvioDeCorreo" />
   </wsdl:message>
   <wsdl:message name="IPartidaService_CrearPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearPartida" />
@@ -286,6 +289,12 @@
   </wsdl:message>
   <wsdl:message name="IJuegoService_ReportarJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:ReportarJugador" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoService_DeconectarseDeJuego_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeconectarseDeJuego" />
+  </wsdl:message>
+  <wsdl:message name="IJuegoService_DeconectarseDeJuego_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeconectarseDeJuegoResponse" />
   </wsdl:message>
   <wsdl:message name="IJuegoService_MostrarMovimiento_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MostrarMovimiento" />
@@ -377,15 +386,14 @@
   <wsdl:portType name="IRegistroService">
     <wsdl:operation name="CrearJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegistroService/CrearJugador" message="tns:IRegistroService_CrearJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistroService/CrearJugadorResponse" message="tns:IRegistroService_CrearJugador_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EnviarCorreoRegistro">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegistroService/EnviarCorreoRegistro" message="tns:IRegistroService_EnviarCorreoRegistro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistroService/EnviarCorreoRegistroResponse" message="tns:IRegistroService_EnviarCorreoRegistro_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="VerificarCreacionJugador">
       <wsdl:output wsaw:Action="http://tempuri.org/IRegistroService/VerificarCreacionJugador" message="tns:IRegistroService_VerificarCreacionJugador_OutputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="VerificarEnvioDeCorreo">
-      <wsdl:output wsaw:Action="http://tempuri.org/IRegistroService/VerificarEnvioDeCorreo" message="tns:IRegistroService_VerificarEnvioDeCorreo_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartidaService">
@@ -440,6 +448,10 @@
     </wsdl:operation>
     <wsdl:operation name="ReportarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/ReportarJugador" message="tns:IJuegoService_ReportarJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeconectarseDeJuego">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/DeconectarseDeJuego" message="tns:IJuegoService_DeconectarseDeJuego_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/DeconectarseDeJuegoResponse" message="tns:IJuegoService_DeconectarseDeJuego_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MostrarMovimiento">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/MostrarMovimiento" message="tns:IJuegoService_MostrarMovimiento_OutputCallbackMessage" />
@@ -556,21 +568,21 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EnviarCorreoRegistro">
       <soap12:operation soapAction="http://tempuri.org/IRegistroService/EnviarCorreoRegistro" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="VerificarCreacionJugador">
-      <soap12:operation soapAction="http://tempuri.org/IRegistroService/VerificarCreacionJugador" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VerificarEnvioDeCorreo">
-      <soap12:operation soapAction="http://tempuri.org/IRegistroService/VerificarEnvioDeCorreo" style="document" />
+    <wsdl:operation name="VerificarCreacionJugador">
+      <soap12:operation soapAction="http://tempuri.org/IRegistroService/VerificarCreacionJugador" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -687,6 +699,15 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DeconectarseDeJuego">
+      <soap12:operation soapAction="http://tempuri.org/IJuegoService/DeconectarseDeJuego" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="MostrarMovimiento">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/MostrarMovimiento" style="document" />
