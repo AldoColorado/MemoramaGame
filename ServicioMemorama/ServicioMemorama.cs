@@ -154,7 +154,6 @@ namespace ServicioMemorama
             mail.BodyEncoding = System.Text.Encoding.UTF8;
             mail.IsBodyHtml = true;
             mail.From = new System.Net.Mail.MailAddress("memogamelisuv@gmail.com");
-
             System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
 
             cliente.Credentials = new System.Net.NetworkCredential("memogamelisuv@gmail.com", "luzio1234");
@@ -167,7 +166,7 @@ namespace ServicioMemorama
                 cliente.Send(mail);
                 correoEnviado = true;
             }
-            catch(Exception ex)
+            catch(System.Net.Mail.SmtpFailedRecipientException ex)
             {
                 Console.WriteLine(ex.GetBaseException());
             }
@@ -206,7 +205,7 @@ namespace ServicioMemorama
                 cliente.Send(mail);
                 correoEnviado = true;
             }
-            catch(Exception ex)
+            catch(System.Net.Mail.SmtpFailedRecipientException ex)
             {
                 Console.WriteLine(ex.GetBaseException());
                 correoEnviado = false;
@@ -387,7 +386,6 @@ namespace ServicioMemorama
                     {
                         callback.JugadoresEnPartida(this.jugadoresEnPartida);
                     }
-
                 }
             }
         }
