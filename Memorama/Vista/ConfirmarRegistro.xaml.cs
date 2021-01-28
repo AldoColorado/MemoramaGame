@@ -59,20 +59,38 @@ namespace Memorama
             {
                 InstanceContext contexto = new InstanceContext(this);
                 ProxyRegistro.RegistroServiceClient servidor = new ProxyRegistro.RegistroServiceClient(contexto);
+                try
+                {
+                    bool creado = servidor.CrearJugador(jugador);
 
-                servidor?.CrearJugador(jugador);
-                MessageBox.Show("Registro completado con exito");
+                    if(creado)
+                    {
+                        MessageBox.Show("Registro completado con exito");
+
+                        Login ventanaLogin = new Login();
+                        Window.GetWindow(this).Close();
+                        ventanaLogin.Show();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("El servidor no se encuentra disponible");
+                    Window.GetWindow(this).Close();
+                }
+
             }
             else
             {
                 MessageBox.Show("El codigo ingresado no coincide con el que te fue proporcionado");
             }
 
-            Login ventanaLogin = new Login();
-            Window.GetWindow(this).Close();
-            ventanaLogin.Show();
-
         }
 
+        private void BotonRegresar(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            Window.GetWindow(this).Close();
+            login.Show();   
+        }
     }
 }

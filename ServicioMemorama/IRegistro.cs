@@ -11,11 +11,11 @@ namespace ServicioMemorama
     [ServiceContract(CallbackContract = typeof(IRegistroServiceCallback))]
     public interface IRegistroService
     {
-        [OperationContract(IsOneWay = true)]
-        void CrearJugador(Jugador jugador);
+        [OperationContract]
+        bool CrearJugador(Jugador jugador);
 
-        [OperationContract(IsOneWay = true)]
-        void EnviarCorreoRegistro(string correo, string codigoDeRegistro);
+        [OperationContract]
+        bool EnviarCorreoRegistro(string correo, string codigoDeRegistro);
     }
 
     public interface IRegistroServiceCallback
@@ -23,7 +23,5 @@ namespace ServicioMemorama
         [OperationContract(IsOneWay = true)]
         void VerificarCreacionJugador(bool creado);
 
-        [OperationContract(IsOneWay = true)]
-        void VerificarEnvioDeCorreo(bool enviado);
     }
 }

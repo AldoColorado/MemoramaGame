@@ -1,6 +1,7 @@
 ﻿using Modelo.Modelo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -26,13 +27,14 @@ namespace Memorama.Vista
         ProxyPartida.PartidaServiceClient servidor;
         Jugador jugador;
         string codigoPartida;
+        ObservableCollection<Jugador> jugadores;
 
-        public CrearPartida(Jugador jugador)
+        public CrearPartida(ObservableCollection<Jugador> jugadores, Jugador jugador)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.jugador = jugador;
-
+            this.jugadores = jugadores;
             partida = new Partida();
 
             contexto = new InstanceContext(this);
@@ -78,15 +80,22 @@ namespace Memorama.Vista
 
                 if(creada)
                 {
-                    PrePartida ventanaPrePartida = new PrePartida(jugador, codigoPartida);
-                    ventanaPrePartida.Show();
+                    PrePartida ventanaPrePartida = new PrePartida(jugadores, jugador, codigoPartida);
                     Window.GetWindow(this).Close();
+                    ventanaPrePartida.Show();
                 }
             }
             else
             {
                 MessageBox.Show("Por favor genera el codigo de la partida");
             }   
+        }
+
+        private void BotonRegresar(object sender, RoutedEventArgs e)
+        {
+            Lobby lobby = new Lobby(jugadores, jugador);
+            Window.GetWindow(this).Close();
+            lobby.Show();
         }
     }
 }

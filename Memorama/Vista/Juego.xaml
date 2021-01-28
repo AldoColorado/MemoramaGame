@@ -65,8 +65,8 @@
 
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="SALIR" Width="118" 
                 HorizontalAlignment="Right" Margin="0,680,47.6,67.2" Click="botonSalir" Height="Auto"/>
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="REPORTAR JUGADOR" Width="151" 
-                HorizontalAlignment="Right" Margin="0,536,14.6,214.2" Click="botonReportar" Height="Auto"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="REPORTAR JUGADOR" Width="166" 
+                HorizontalAlignment="Right" Margin="0,536,23.6,223.2" Click="botonReportar" Height="Auto"/>
 
     </Grid>
 </Window>

@@ -18,7 +18,7 @@ namespace Memorama
         InstanceContext contexto;
         ProxyLogin.LoginServiceClient servidor;
 
-        private ObservableCollection<Jugador> jugadoresConectados;
+        ObservableCollection<Jugador> jugadoresConectados;
         Jugador jugador = new Jugador();
 
         public Lobby(ObservableCollection<Jugador> jugadores, Jugador jugador)
@@ -28,11 +28,18 @@ namespace Memorama
             InitializeComponent();
             TxtJugador.Text = jugador.nickName;
 
-            jugadoresEnLinea.Items.Clear();
-            jugadoresEnLinea.ItemsSource = jugadores;
-
             contexto = new InstanceContext(this);
             servidor = new ProxyLogin.LoginServiceClient(contexto);
+
+            if(!servidor.BuscarClientePorNombre(jugador.nickName))
+            {
+                servidor.Conectarse(jugador);
+            }
+
+            jugadoresConectados = new ObservableCollection<Jugador>();
+            jugadoresConectados = jugadores;
+            jugadoresEnLinea.Items.Clear();
+            jugadoresEnLinea.ItemsSource = jugadoresConectados;
         }
 
         public void UsuariosConectados(Jugador[] jugadores)
@@ -53,14 +60,14 @@ namespace Memorama
 
         private void BotonCrearPartida(object sender, System.Windows.RoutedEventArgs e)
         {
-            CrearPartida ventanaConfirmarRegistro = new CrearPartida(jugador);
+            CrearPartida ventanaConfirmarRegistro = new CrearPartida(jugadoresConectados, jugador);
             ventanaConfirmarRegistro.Show();
             Window.GetWindow(this).Close();
         }
 
         private void BotonUnirseAPartida(object sender, System.Windows.RoutedEventArgs e)
         {
-            UnirseAPartida ventanaUnirseAPartida = new UnirseAPartida(jugador);
+            UnirseAPartida ventanaUnirseAPartida = new UnirseAPartida(jugadoresConectados, jugador);
             ventanaUnirseAPartida.Show();
             Window.GetWindow(this).Close();
         }
@@ -80,7 +87,7 @@ namespace Memorama
 
         private void BotonPuntajes(object sender, RoutedEventArgs e)
         {
-            Puntajes ventanPuntajes = new Puntajes();
+            Puntajes ventanPuntajes = new Puntajes(jugadoresConectados, jugador);
             ventanPuntajes.Show();
             Window.GetWindow(this).Close();
         }

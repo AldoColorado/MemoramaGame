@@ -27,9 +27,9 @@ namespace Memorama
     /// </summary>
     public partial class Login : ProxyLogin.ILoginServiceCallback
     {
-        private ResourceManager recurso;
-        public bool aceptado = false;
-        private ObservableCollection<Jugador> jugadoresConectados;
+        ResourceManager recurso;
+        bool aceptado = false;
+        ObservableCollection<Jugador> jugadoresConectados;
         Dictionary<Jugador, ILoginServiceCallback> jugadoresEnLinea = new Dictionary<Jugador, ILoginServiceCallback>();
         InstanceContext contexto;
         ProxyLogin.LoginServiceClient servidor;

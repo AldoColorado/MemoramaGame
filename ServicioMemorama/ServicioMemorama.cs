@@ -116,27 +116,29 @@ namespace ServicioMemorama
 
     public partial class ServicioMemorama : IRegistroService
     {
-        public void CrearJugador(Jugador jugador)
+        public bool CrearJugador(Jugador jugador)
         {
             bool creado = false;
+
             JugadorDAO jugadorDAO = new JugadorDAO();
             creado = jugadorDAO.Crear(jugador);
 
             if(creado)
             {
-                var conexion = OperationContext.Current.GetCallbackChannel<IRegistroServiceCallback>();
-                conexion.VerificarCreacionJugador(true);
                 Console.WriteLine("Jugador creado");
+                creado = true;
             }
             else
             {
                 Console.WriteLine("No se creo");
             }
+
+            return creado;
         }
 
-        public void EnviarCorreoRegistro(string correo, string codigoDeRegistro)
+        public bool EnviarCorreoRegistro(string correo, string codigoDeRegistro)
         {
-            bool correoEnviado;
+            bool correoEnviado = false;
 
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
 
@@ -163,19 +165,9 @@ namespace ServicioMemorama
             catch(Exception ex)
             {
                 Console.WriteLine(ex.GetBaseException());
-                correoEnviado = false;
             }
 
-            if(correoEnviado)
-            {
-                var conexion = OperationContext.Current.GetCallbackChannel<IRegistroServiceCallback>();
-                conexion.VerificarEnvioDeCorreo(true);
-
-            }
-            else
-            {
-                Console.WriteLine("No se pudo enviar el correo");
-            }
+            return correoEnviado;
         }
     }
 

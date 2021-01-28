@@ -1,6 +1,7 @@
 ﻿using Modelo.Modelo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -26,11 +27,14 @@ namespace Memorama.Vista
         string codigoPartida = "";
         InstanceContext contexto;
         ProxyPartida.PartidaServiceClient servidor;
+        ObservableCollection<Jugador> jugadoresConectados;
 
-        public UnirseAPartida(Jugador jugador)
+        public UnirseAPartida(ObservableCollection<Jugador> jugadores, Jugador jugador)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            jugadoresConectados = new ObservableCollection<Jugador>();
+            this.jugadoresConectados = jugadores;
             this.jugador = jugador;
             partida = new Partida();
             contexto = new InstanceContext(this);
@@ -57,7 +61,7 @@ namespace Memorama.Vista
 
                 if(estadisticaCreada)
                 {
-                    PrePartida ventanaPrePartida = new PrePartida(jugador, codigoPartida);
+                    PrePartida ventanaPrePartida = new PrePartida(jugadoresConectados, jugador, codigoPartida);
                     ventanaPrePartida.Show();
                     Window.GetWindow(this).Close();
                 }
@@ -66,9 +70,7 @@ namespace Memorama.Vista
             else
             {
                 MessageBox.Show("El codigo no corresponde a ninguna partida en curso");
-            }
-
-           
+            }   
         }
 
         public void IngresarCodigo()
@@ -85,6 +87,13 @@ namespace Memorama.Vista
         public void OrdenCartas(int[] numeros)
         {
             throw new NotImplementedException();
+        }
+
+        private void BotonRegresar(object sender, RoutedEventArgs e)
+        {
+            Lobby lobby = new Lobby(jugadoresConectados, jugador);
+            Window.GetWindow(this).Close();
+            lobby.Show();
         }
     }
 }

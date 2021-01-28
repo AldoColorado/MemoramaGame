@@ -30,6 +30,7 @@ namespace Memorama.Vista
         ProxyJuego.JuegoServiceClient servidor;
         InstanceContext contextoEstadisticas;
         ProxyEstadisticas.EstadisticasServiceClient servidorEstadisticas;
+        ObservableCollection<Jugador> jugadores = new ObservableCollection<Jugador>();
         Partida partida;
         EstadisticaPartida estadisticaJugador;
         int statusReporteJugador = 0;
@@ -43,11 +44,12 @@ namespace Memorama.Vista
         ObservableCollection<Jugador> jugadoresJuego;
         ObservableCollection<string> jugadoresEnLinea;
 
-        public Juego(JuegoMemorama juego, Jugador jugador, Partida partida)
+        public Juego(JuegoMemorama juego, Jugador jugador, Partida partida, ObservableCollection<Jugador> jugadoresConectados)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
 
+            this.jugadores = jugadoresConectados;
             contexto = new InstanceContext(this);
             contextoEstadisticas = new InstanceContext(this);
             servidor = new ProxyJuego.JuegoServiceClient(contexto);
@@ -160,6 +162,10 @@ namespace Memorama.Vista
             try
             {
                 servidorEstadisticas.GuardarEstadisticasPartida(estadisticaJugador, jugador, partida);
+                Lobby ventanaLobby = new Lobby(jugadores , jugador);
+                Window.GetWindow(this).Close();
+                ventanaLobby.Show();
+
             }
             catch(Exception ex)
             {

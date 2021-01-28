@@ -27,12 +27,16 @@ namespace Memorama.Vista
         JuegoMemorama juego = new JuegoMemorama();
         private ObservableCollection<Jugador> jugadoresConectados;
         ObservableCollection<int> numerosOrdenCartas;
+        ObservableCollection<Jugador> jugadoresEnLinea;
         Partida partida;
 
-        public PrePartida(Jugador jugador, string codigoPartida)
+        public PrePartida(ObservableCollection<Jugador> jugadores, Jugador jugador, string codigoPartida)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+
+            jugadoresEnLinea = new ObservableCollection<Jugador>();
+            this.jugadoresEnLinea = jugadores;
 
             partida = new Partida();
             this.jugador = jugador;
@@ -71,7 +75,7 @@ namespace Memorama.Vista
 
         private void BotonJugar(object sender, RoutedEventArgs e)
         {
-            Juego ventana = new Juego(juego, jugador, partida);
+            Juego ventana = new Juego(juego, jugador, partida, jugadoresEnLinea);
             Window.GetWindow(this).Close();
             ventana.Show();
         }
@@ -79,12 +83,14 @@ namespace Memorama.Vista
         private void BotonRegresarAlLobby(object sender, RoutedEventArgs e)
         {
             servidor.DesconectarseDePartida(jugador);
-            Window.GetWindow(this).Close();
+            AbrirVentanaLobby();
         }
 
         public void AbrirVentanaLobby()
         {
-
+            Lobby ventanLobby = new Lobby(jugadoresEnLinea, jugador);
+            Window.GetWindow(this).Close();
+            ventanLobby.Show();
         }
 
         public void OrdenCartas(int[] numeros)

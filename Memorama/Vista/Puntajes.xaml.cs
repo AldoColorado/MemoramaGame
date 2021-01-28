@@ -24,22 +24,26 @@ namespace Memorama.Vista
     {
         ObservableCollection<Jugador> listaJugadores;
         ObservableCollection<Tabla> coleccionTabla;
+        ObservableCollection<Jugador> jugadoresConectados;
         ObservableCollection<int> listaPuntajes;
+        Jugador jugador = new Jugador();
         Jugador[] jugadores;
         int[] puntajes;
         string[] players;
-        InstanceContext contexto;
+
         ProxyEstadisticas.EstadisticasServiceClient servidor;
         Tabla[] tablaPuntajes;
 
-        public Puntajes()
+        public Puntajes(ObservableCollection<Jugador> jugadores, Jugador jugador)
         {
             InitializeComponent();
 
             servidor = new ProxyEstadisticas.EstadisticasServiceClient();
-            puntajes = new int[2];
+            puntajes = new int[10];
             players = new string[10];
             coleccionTabla = new ObservableCollection<Tabla>();
+            this.jugadoresConectados = jugadores;
+            this.jugador = jugador;
 
             try
             {
@@ -70,7 +74,9 @@ namespace Memorama.Vista
 
         private void BotonRegresar(object sender, RoutedEventArgs e)
         {
-
+            Lobby ventanLobby = new Lobby(jugadoresConectados, jugador);
+            Window.GetWindow(this).Close();
+            ventanLobby.Show();
         }
 
         public void InicializarCollecionJugadores()

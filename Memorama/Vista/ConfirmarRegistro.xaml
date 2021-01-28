@@ -38,8 +38,11 @@
                         <TextBox x:Name="TextoCodigo" Width="240" materialDesign:HintAssist.Hint="{x:Static idioma:Idioma.codigo}" materialDesign:HintAssist.IsFloating="True"></TextBox>
                     </StackPanel>
 
-                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="{x:Static idioma:Idioma.boton_Registrarse}" Width="110" HorizontalAlignment="Right" Margin="0 10 20 0" Click="BotonRegistrarse"/>
+                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="{x:Static idioma:Idioma.boton_Registrarse}" 
+                            Width="110" HorizontalAlignment="Right" Margin="0 10 20 0" Click="BotonRegistrarse"/>
                 </StackPanel>
+
+                <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="Regresar" Width="110" HorizontalAlignment="Right" Margin="0,163,69.6,37" Click="BotonRegresar"/>
             </Grid>
         </Grid>
     </Grid>

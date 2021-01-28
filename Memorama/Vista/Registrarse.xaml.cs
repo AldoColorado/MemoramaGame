@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,11 +56,47 @@ namespace Memorama
             InstanceContext contexto = new InstanceContext(this);
             ProxyRegistro.RegistroServiceClient servidor = new ProxyRegistro.RegistroServiceClient(contexto);
 
-            servidor?.EnviarCorreoRegistro(TextoCorreo.Text, codigo);
-           
-            ConfirmarRegistro ventanaConfirmarRegistro = new ConfirmarRegistro(jugador, codigo);
-            ventanaConfirmarRegistro.Show();
-            Window.GetWindow(this).Close();
+            
+
+            if(jugador.nickName !="" && jugador.nombre != "" && jugador.correoElectronico != "" && jugador.contrasenia != "")
+            {
+                if(validarCorreoElectronico())
+                {
+                    try
+                    {
+                        bool enviado = servidor.EnviarCorreoRegistro(TextoCorreo.Text, codigo);
+
+                        if(enviado)
+                        {
+                            ConfirmarRegistro ventanaConfirmarRegistro = new ConfirmarRegistro(jugador, codigo);
+                            ventanaConfirmarRegistro.Show();
+                            Window.GetWindow(this).Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo enviar el correo, rectifique que sea valido");
+                        }
+
+                        
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("ERROR: El servidor no se encuentra disponible, intenta más tarde");
+                        Window.GetWindow(this).Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Formato de correo invalido, ingresa el correo correctamente");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Campos inválidos, por favor ingresa los datos correctamente");
+            }
+
+
         }
 
         public void GenerarCodigoRegistro()
@@ -82,6 +119,19 @@ namespace Memorama
         public void VerificarEnvioDeCorreo(bool enviado)
         {
             this.correoEnviado = enviado;
+        }
+
+        public bool validarCorreoElectronico()
+        {
+            try
+            {
+                MailAddress correo = new MailAddress(TextoCorreo.Text);
+                return true;
+            }
+            catch(FormatException)
+            {
+                return false;
+            }
         }
     }
 }
