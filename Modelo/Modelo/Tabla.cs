@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace Modelo.Modelo
 {
-    /// <summary>
-    /// Estructura para la creacion de tablas
-    /// </summary>
     public class Tabla
     {
         /// <summary>

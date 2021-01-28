@@ -56,7 +56,7 @@ namespace Memorama.Vista
                 servidor.AgregarJugador(jugador);
                 servidor.GenerarOrdenCartas();
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 MessageBox.Show(ex.ToString());
             }

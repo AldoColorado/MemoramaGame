@@ -25,6 +25,10 @@ namespace Modelo.Modelo
             {
                 Console.WriteLine(ex.GetBaseException());
             }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
             return creado;
 
@@ -58,6 +62,10 @@ namespace Modelo.Modelo
                 Console.WriteLine(ex.GetBaseException());
                 partidaEncontrada = false;
             }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
 
             return partidaEncontrada;
@@ -67,7 +75,7 @@ namespace Modelo.Modelo
         /// <summary>
         /// Heredado de AbstractCRUD
         /// </summary>
-        public override bool Eliminar(string pk)
+        public override bool Eliminar(string llavePrimaria)
         {
             throw new NotImplementedException();
         }
@@ -91,9 +99,9 @@ namespace Modelo.Modelo
         /// <summary>
         /// Heredado de AbstractCRUD
         /// </summary>
-        public override Partida ObtenerEntidad(string pk)
+        public override Partida ObtenerEntidad(string llavePrimaria)
         {
-            return db.Partida.Where(q => q.codigo.Equals(pk)).First<Partida>();
+            return db.Partida.Where(q => q.codigo.Equals(llavePrimaria)).First<Partida>();
         }
     }
 }

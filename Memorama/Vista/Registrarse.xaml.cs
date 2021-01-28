@@ -57,19 +57,23 @@ namespace Memorama
             string contraseniaEncriptada = string.Empty;
             byte[] encryted = System.Text.Encoding.Unicode.GetBytes(TextoPassword.Password);
             contraseniaEncriptada = Convert.ToBase64String(encryted);
-
-
+            
             jugador.nickName = TextoNickName.Text;
             jugador.nombre = TextoNombre.Text;
             jugador.correoElectronico = TextoCorreo.Text;
             jugador.contrasenia = contraseniaEncriptada;
+
+            bool nicknameValido = ValidarCampo(TextoNickName.Text);
+            bool nombreValido = ValidarCampo(TextoNombre.Text);
+            bool correoValido = ValidarCampo(TextoCorreo.Text);
+            bool contraseniaValida = ValidarCampo(TextoPassword.Password);
 
             GenerarCodigoRegistro();
 
             InstanceContext contexto = new InstanceContext(this);
             ProxyRegistro.RegistroServiceClient servidor = new ProxyRegistro.RegistroServiceClient(contexto);
 
-            if(jugador.nickName !="" && jugador.nombre != "" && jugador.correoElectronico != "" && jugador.contrasenia != "")
+            if(nicknameValido && nombreValido && correoValido && contraseniaValida)
             {
                 if(validarCorreoElectronico())
                 {
@@ -154,6 +158,25 @@ namespace Memorama
             {
                 return false;
             }
+        }
+    
+        public bool ValidarCampo(string campo)
+        {
+            if (campo != null)
+            {
+                for (int i = 0; i < campo.Length; i++)
+                {
+                    if (campo.Substring(i,1) == " ")
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

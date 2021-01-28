@@ -27,6 +27,10 @@ namespace Modelo
             {
                 Console.WriteLine(ex.ToString());
             }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
             return creado;
         }
@@ -49,7 +53,11 @@ namespace Modelo
                     usuarioValido = true;
                 }
             }
-            catch(Exception ex)
+            catch(System.InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch (NullReferenceException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -60,12 +68,12 @@ namespace Modelo
         /// <summary>
         /// Heredado de AbstractCRUD
         /// </summary>
-        public override bool Eliminar(string pk)
+        public override bool Eliminar(string llavePrimaria)
         {
             bool eliminado = false;
             try
             {
-                Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(pk)).First<Jugador>();
+                Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(llavePrimaria)).First<Jugador>();
 
                 if(buscar == null)
                 {
@@ -78,9 +86,13 @@ namespace Modelo
                     eliminado = true;
                 }
             }
-            catch(Exception ex)
+            catch(System.InvalidOperationException ex)
             {
-
+                Console.WriteLine(ex.ToString());
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
 
             return eliminado;
@@ -107,7 +119,7 @@ namespace Modelo
         /// </summary>
         public override void Modificar(Jugador entity)
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -130,6 +142,10 @@ namespace Modelo
             {
                 Console.WriteLine(ex.GetBaseException());
             }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return encontrado;
         }
 
@@ -149,6 +165,10 @@ namespace Modelo
             {
                 Console.WriteLine(ex.GetBaseException());
             }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return null;
         }
 
@@ -160,12 +180,23 @@ namespace Modelo
         /// <returns>Regresa True si se pudo actualizar la contraseña sino regresa False</returns>
         public bool ActualizarContrasenia(string contrasenia, string nickname)
         {
-            Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(nickname)).FirstOrDefault();
-            if(buscar != null)
+            try
             {
-                buscar.contrasenia = contrasenia;
-                db.SaveChanges();
-                return true;
+                Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(nickname)).FirstOrDefault();
+                if (buscar != null)
+                {
+                    buscar.contrasenia = contrasenia;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.GetBaseException());
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
             return false;
         }

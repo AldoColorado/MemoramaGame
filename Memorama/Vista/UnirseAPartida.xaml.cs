@@ -64,7 +64,7 @@ namespace Memorama.Vista
                     servidor.CrearEstadisticaPartida(partida, jugador);
                     estadisticaCreada = true;
                 }
-                catch(Exception ex)
+                catch(CommunicationException ex)
                 {
                     MessageBox.Show("No existe partida en curso");
                 }

@@ -138,9 +138,9 @@ namespace Memorama
             {
                 logeado = servidor.Login(TextoNickName.Text, TextoPassword.Password);
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
-                string msj2 = this.recurso.GetString("vLoginMsj2");
+                string msj2 = this.recurso.GetString("vLoginMsj2"+ex.ToString());
                 MessageBox.Show(msj2);
                 Application.Current.Shutdown();
             }
@@ -177,9 +177,9 @@ namespace Memorama
                     MessageBox.Show(msj3);
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
-                string msj2 = this.recurso.GetString("vLoginMsj2");
+                string msj2 = this.recurso.GetString("vLoginMsj2"+ex.ToString());
                 MessageBox.Show(msj2);
                 Application.Current.Shutdown();
             }

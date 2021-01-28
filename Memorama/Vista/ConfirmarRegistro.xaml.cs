@@ -92,8 +92,15 @@ namespace Memorama
                         Window.GetWindow(this).Close();
                         ventanaLogin.Show();
                     }
+                    else
+                    {
+                        MessageBox.Show("No se pudo registrar, el correo ya tiene una cuenta asignada");
+                        Login ventanaLogin = new Login();
+                        Window.GetWindow(this).Close();
+                        ventanaLogin.Show();
+                    }
                 }
-                catch(Exception ex)
+                catch(CommunicationException ex)
                 {
                     MessageBox.Show("El servidor no se encuentra disponible");
                     Window.GetWindow(this).Close();

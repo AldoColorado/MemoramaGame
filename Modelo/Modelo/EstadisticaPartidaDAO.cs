@@ -31,15 +31,20 @@ namespace Modelo.Modelo
                 creado = false;
                 Console.WriteLine(ex.ToString());
             }
+            catch (NullReferenceException ex)
+            {
+                creado = false;
+                Console.WriteLine(ex.ToString());
+            }
             return creado;
         }
 
         /// <summary>
         /// Metodo para eliminar estadistica
         /// </summary>
-        /// <param name="pk">Llave primaria de la estadistica</param>
+        /// <param name="llavePrimaria">Llave primaria de la estadistica</param>
         /// <returns>Verdadero en caso de exito</returns>
-        public override bool Eliminar(string pk)
+        public override bool Eliminar(string llavePrimaria)
         {
             throw new NotImplementedException();
         }
@@ -72,9 +77,9 @@ namespace Modelo.Modelo
         /// <summary>
         /// Metodo para obtener cierta entidad
         /// </summary>
-        /// <param name="pk">Llave de la entidad</param>
+        /// <param name="llavePrimaria">Llave de la estadística</param>
         /// <returns>Regresa la entidad</returns>
-        public override EstadisticaPartida ObtenerEntidad(string pk)
+        public override EstadisticaPartida ObtenerEntidad(string llavePrimaria)
         {
             throw new NotImplementedException();
         }

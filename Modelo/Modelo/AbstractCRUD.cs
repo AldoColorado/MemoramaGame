@@ -28,9 +28,9 @@ namespace Modelo
         /// <summary>
         /// Permite eliminar de la base de datos, la entidad que está relacionada con el atributo mandado como parámetro.
         /// </summary>
-        /// <param name="pk">Nombre del parámetro mandado</param>
+        /// <param name="llavePrimaria">Llave primaria del registro que se quiere eliminar</param>
         /// <returns>Regresa True si se pudo elimar el registro sino regresa False</returns>
-        public abstract bool Eliminar(string pk);
+        public abstract bool Eliminar(string llavePrimaria);
         /// <summary>
         /// Permite obtener todos los registros del tipo de obejeto mandado.
         /// </summary>
@@ -39,9 +39,9 @@ namespace Modelo
         /// <summary>
         /// Método que permite obtener un registro de la base de datos
         /// </summary>
-        /// <param name="pk">Nombre del parámetro con el cual se utilizará para buscar el registro de la base de datos</param>
+        /// <param name="llavePrimaria">Llave primaria del registro que se quiere obtener</param>
         /// <returns>Regresa el registro obtenido</returns>
-        public abstract T ObtenerEntidad(string pk);
+        public abstract T ObtenerEntidad(string llavePrimaria);
 
     }
 }

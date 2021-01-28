@@ -60,7 +60,7 @@ namespace Memorama
                     MessageBox.Show("No se encontró ningún jugador con ese correo");
                 }
             }
-            catch(Exception ex)
+            catch(CommunicationException ex)
             {
                 MessageBox.Show("ERROR: El servidor no esta disponible, intente más tarde");
             }
