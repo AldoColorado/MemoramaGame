@@ -8,6 +8,9 @@ namespace Modelo.Modelo
 {
     public class PartidaDAO : AbstractCRUD<Partida>
     {
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override bool Crear(Partida entity)
         {
             bool creado = false;
@@ -27,6 +30,11 @@ namespace Modelo.Modelo
 
         }
 
+        /// <summary>
+        /// Permite buscar una partida creada
+        /// </summary>
+        /// <param name="codigo">Código de la partida que se está buscando</param>
+        /// <returns>Regresa True si se encontró la partida sino regresa False</returns>
         public bool BuscarPartida(string codigo)
         {
             bool partidaEncontrada = false;
@@ -56,21 +64,33 @@ namespace Modelo.Modelo
 
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override bool Eliminar(string pk)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override void Modificar(Partida entity)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override List<Partida> Obtener()
         {
             return db.Partida.ToList<Partida>();
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override Partida ObtenerEntidad(string pk)
         {
             return db.Partida.Where(q => q.codigo.Equals(pk)).First<Partida>();

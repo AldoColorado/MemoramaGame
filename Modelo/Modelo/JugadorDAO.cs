@@ -10,6 +10,9 @@ namespace Modelo
 {
     public class JugadorDAO : AbstractCRUD<Jugador>
     {
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override bool Crear(Jugador entity)
         {
             bool creado = false;
@@ -28,6 +31,12 @@ namespace Modelo
             return creado;
         }
 
+        /// <summary>
+        /// Permite verificar si el usuario y la contraseña coinciden con algún registro de la base de datos
+        /// </summary>
+        /// <param name="nickName">Usuario del jugador que se está buscando</param>
+        /// <param name="contrasenia">Contraseña del jugador que se está buscando</param>
+        /// <returns>Regresa True si se encuentra algún registro con el nickname y la contrasenia sino regresa False</returns>
         public bool ValidarUsuario(string nickName, string contrasenia)
         {
             bool usuarioValido = false;
@@ -48,6 +57,9 @@ namespace Modelo
             return usuarioValido;
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override bool Eliminar(string pk)
         {
             bool eliminado = false;
@@ -74,21 +86,35 @@ namespace Modelo
             return eliminado;
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override List<Jugador> Obtener()
         {
             return db.Jugador.ToList<Jugador>();
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override Jugador ObtenerEntidad(string pk)
         {
             return db.Jugador.Where(q => q.nickName.Equals(pk)).First<Jugador>();
         }
 
+        /// <summary>
+        /// Heredado de AbstractCRUD
+        /// </summary>
         public override void Modificar(Jugador entity)
         {
 
         }
 
+        /// <summary>
+        /// Busca algún usuario que tenga el correo proporcionado
+        /// </summary>
+        /// <param name="correo">Correo del usuario que se está buscando</param>
+        /// <returns>Regresa True si se encontró algún usuario con ese correo sino regresa False</returns>
         public bool ValidarJugadorPorCorreo(string correo)
         {
             bool encontrado = false;
@@ -107,6 +133,11 @@ namespace Modelo
             return encontrado;
         }
 
+        /// <summary>
+        /// Recupera al jugador que tiene relacionado el correo
+        /// </summary>
+        /// <param name="correo">Correo del jugador que se quiere obtener</param>
+        /// <returns>Regresa al Jugador que tiene asociado el correo mandado</returns>
         public Jugador ObtenerJugadorPorCorreo(string correo)
         {
             try
@@ -121,6 +152,12 @@ namespace Modelo
             return null;
         }
 
+        /// <summary>
+        /// Permite actualizar la contraseña de un jugador
+        /// </summary>
+        /// <param name="contrasenia">La nueva contraseña</param>
+        /// <param name="nickname">Usuario del jugador al cuál se le cambiará la contraseña</param>
+        /// <returns>Regresa True si se pudo actualizar la contraseña sino regresa False</returns>
         public bool ActualizarContrasenia(string contrasenia, string nickname)
         {
             Jugador buscar = db.Jugador.Where(q => q.nickName.Equals(nickname)).FirstOrDefault();

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Modelo.Modelo
 {
+    /// <summary>
+    /// Heredado de AbstractCRUD
+    /// </summary>
     public class EstadisticaPartidaDAO : AbstractCRUD<EstadisticaPartida>
     {
         public override bool Crear(EstadisticaPartida entity)
